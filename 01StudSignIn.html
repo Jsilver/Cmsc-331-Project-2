@@ -199,7 +199,7 @@
         <form action="02StudHome.php" method="post" name="SignIn">
 	    <div class="field">
 	      <label for="firstN">First Name</label>
-	      <input id="firstN" size="20" maxlength="50" type="text" name="firstN" required>
+	      <input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
 	    </div>
 	    <div class="field">
 	      <label for="lastN">Last Name</label>
@@ -207,7 +207,7 @@
 	    </div>
         <div class="field">
             <label for="studID">Student ID</label>
-            <input id="studID" size="20" maxlength="7" type="text" name="studID" required>
+            <input id="studID" size="20" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" required>
         </div>
 		<div class="field">
             <label for="email">E-mail</label>
@@ -218,16 +218,17 @@
               <select id="major" name = "major">
 				<option>Computer Engineering</option>
 				<option>Computer Science</option>
-				<option>Bioinformatics and Computational Biology</option>
+				<option>Mechanical Engineering</option>
+				<option>Chemical Engineering</option>
 				<option>Africana Studies</option>
 				<option>American Studies</option>
 				<option>Ancient Studies</option>
 				<option>Anthropology</option>
 				<option>Asian Studies</option>
 				<option>Biochemistry and Molecular Biology</option>
+				<option>Bioinformatics and Computational Biology</option>
 				<option>Biological Sciences</option>
 				<option>Business Technology Administration</option>
-				<option>Chemical Engineering</option>
 				<option>Chemistry</option>
 				<option>Dance</option>
 				<option>Economics</option>
@@ -245,7 +246,6 @@
 				<option>Management of Aging Services</option>
 				<option>Mathematics</option>
 				<option>Statistics</option>
-				<option>Mechanical Engineering</option>
 				<option>Media and Communication Studies</option>
 				<option>Modern Languages, Linguistics and Intercultural Communication</option>
 				<option>Music</option>
