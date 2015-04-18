@@ -38,7 +38,7 @@
       border-radius: 8px; 
       }
 
-	  h1{ 
+	h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -119,8 +119,8 @@
       }
       
       .button.large {
-        font-size: 16px;
-        height: 32px;
+        font-size: 24px;
+        height: 48px;
         padding: 0 16px;
 		position: center;
       }
@@ -194,25 +194,40 @@
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>CSEE Advising<span class="login-create"></span></h1>
-		<h2>Admin Sign In<span class="login-create"></span></h2>
-        <form action="AdminUI.html" method="post" name="SignIn">
-
-	    <div class="field">
-	      <label for="UserN">Username</label>
-	      <input id="UserN" size="20" maxlength="50" type="text" name="UserN" required autofocus>
-	    </div>
-
-	    <div class="field">
-	      <label for="PassW">Password</label>
-	      <input id="PassW" size="20" maxlength="50" type="text" name="PassW" required>
-	    </div>
-
-	    <div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    </div>
-	</div>
+        <form method="link" action="AdminScheduleApp.html">
+	<input type="submit" name="next" class="button large go" value="Schedule appointments">
 	</form>
+	
+	<br />
+
+	<form method="link" action="AdminPrintSchedule.html">
+	<input type="submit" name="next" class="button large go" value="Print schedule for a day">
+	</form>
+
+	<br />
+
+	<form method="link" action="AdminEditApp.html">
+	<input type="submit" name="next" class="button large go" value="Edit appointments">
+	</form>
+
+	<br />
+
+	<form method="link" action="AdminSearchApp.html">
+	<input type="submit" name="next" class="button large go" value="Search for an appointment">
+	</form>
+
+	<br />
+
+	<form method="link" action="StudentAdminSignIn.html">
+	<input type="submit" name="next" class="button large go" value="Log Out">
+	</form>
+          
+        </div>
+        <div class="field">
+          
+        </div>
+	</div>
+		
   </body>
   
 </html>
