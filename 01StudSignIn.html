@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>UMBC CSEE Undergraduate Advising Sign In</title>
+    <title>UMBC CSEE Undergraduate Advising Student Sign In</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -196,22 +196,22 @@
         <div class="top">
 		<h1>CSEE Advising<span class="login-create"></span></h1>
 		<h2>Sign In<span class="login-create"></span></h2>
-        <form action="02StudHome.php" method="post" name="SignIn">
+        <form action="StudProcessSignIn.php" method="post" name="SignIn">
 	    <div class="field">
 	      <label for="firstN">First Name</label>
-	      <input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
+	      <input id="firstN" size="30" maxlength="50" type="text" name="firstN" required autofocus>
 	    </div>
 	    <div class="field">
 	      <label for="lastN">Last Name</label>
-	      <input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
+	      <input id="lastN" size="30" maxlength="50" type="text" name="lastN" required>
 	    </div>
         <div class="field">
             <label for="studID">Student ID</label>
-            <input id="studID" size="20" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" required>
+            <input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" required>
         </div>
 		<div class="field">
             <label for="email">E-mail</label>
-            <input id="email" size="20" maxlength="255" type="email" name="email" required>
+            <input id="email" size="30" maxlength="255" type="email" name="email" required>
         </div>
         <div class="field">
               <label for="major">Major</label>
