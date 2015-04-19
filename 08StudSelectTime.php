@@ -14,7 +14,7 @@ $COMMON = new Common($debug);
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Select Advisor</title>
+    <title>Select Appointment</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -79,7 +79,7 @@ $COMMON = new Common($debug);
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], input[type="radio"]textarea {
+      input[type="text"],input[type="email"], input[type="radio"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -89,7 +89,7 @@ $COMMON = new Common($debug);
         padding: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
-        width: 262px;
+        width: 20px;
       }
 	  
 	  select{
@@ -165,8 +165,8 @@ $COMMON = new Common($debug);
 
       .field label{ 
       display: block; 
-      font-weight: bold; 
-      font-size: 14px; 
+      font-size: 16px;
+		margin-left: 10px;
       }
 	  
       .actions{ 
@@ -230,42 +230,37 @@ $COMMON = new Common($debug);
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Individual Advising</h1>
-		<h2>Select Advisor</h2>
+		<h1>Select Appointment Time</h1>
 	    <div class="field">
-		<form action="08StudSelectTime.php" method="post" name="SelectAdvisor">
+		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
-if ($_SESSION["advisor"] != "Group"){
-	$sql = "select * from Proj1AppointmentsIndiv where `IsOpen` = 1 and `AdvisorName` = '$localAdvisor'";
-	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-	echo "<h2>Individual Advising</h2><br>";
-	echo "<p>Select appointment with ",$_SESSION["advisor"],":";
-}
-else{
-	$sql = "select * from Proj1AppointmentsGroup where `Enrolled` <10";
-	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-	echo "<h2>Group Advising</h2><br>";
-	echo "<p>Select appointment:<br>";
-}
-
-echo "<form action = '07Confirm.php' method = 'post' name = 'SelectTime'>";
-while($row = mysql_fetch_row($rs)){
-	$datephp = strtotime($row[1]);
-	echo "<p><input type = 'radio' name = 'appTime' value = '", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"<br>"; //Time is index1 for both DBs
-}
-
-echo "<p><input type ='submit' value = 'Next'></form><br><br>";
-
-echo "<p>Note that appointments are maximum 30 minutes long.<br>";
-
-echo "<p>If there are no more open appointments, contact your advisor or click <a href='09Exit.php'>here</a> to start over.<br>";
-
-?>
+			if ($_SESSION["advisor"] != "Group"){
+				$sql = "select * from Proj1AppointmentsIndiv where `IsOpen` = 1 and `AdvisorName` = '$localAdvisor'";
+				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+				echo "<h2>Individual Advising</h2><br>";
+				echo "<label for='prompt'>Select appointment with ",$_SESSION["advisor"],":</label><br>";
+			}
+			else{
+				$sql = "select * from Proj1AppointmentsGroup where `Enrolled` < `Max`";
+				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+				echo "<h2>Group Advising</h2><br>";
+				echo "<label for='prompt'>Select appointment:</label><br>";
+			}
+			while($row = mysql_fetch_row($rs)){
+				$datephp = strtotime($row[1]);
+				echo "<label for='appTime'>";
+				echo "<input type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>"; //Time is index1 for both DBs
+			}
+		?>
         </div>
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Next">
 	    </div>
-		</div>
 		</form>
+		</div>
+		<div class="bottom">
+		<p>Note: Appointments are maximum 30 minutes long.</p>
+		<p>If there are no more open appointments, contact your advisor or click <a href='09Exit.php'>here</a> to start over.</p>
+		</div>
   </body>
 </html>
