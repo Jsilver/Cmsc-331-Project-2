@@ -248,8 +248,8 @@ $COMMON = new Common($debug);
 			}
 			while($row = mysql_fetch_row($rs)){
 				$datephp = strtotime($row[1]);
-				echo "<label for='appTime'>";
-				echo "<input type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>"; //Time is index1 for both DBs
+				echo "<label for='",$row[0],"'>";
+				echo "<input id='",$row[0],"'type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>"; //Time is index1 for both DBs
 			}
 		?>
         </div>
@@ -260,7 +260,7 @@ $COMMON = new Common($debug);
 		</div>
 		<div class="bottom">
 		<p>Note: Appointments are maximum 30 minutes long.</p>
-		<p>If there are no more open appointments, contact your advisor or click <a href='09Exit.php'>here</a> to start over.</p>
+		<p>If there are no more open appointments, contact your advisor or click <a href='Logout.php'>here</a> to start over.</p>
 		</div>
   </body>
 </html>

@@ -251,9 +251,9 @@ session_start();
 			if ($studExist == false){
 				echo "<button type='submit' name='selection' class='button large selection' value='Signup'>Signup for an appointment</button><br>";
 
-				//echo "<button type='submit' name='selection' class='button large selection' value='View'>View my appointment</button><br>";
-				//echo "<button type='submit' name='selection' class='button large selection' value='Reschedule'>Reschedule my appointment</button><br>";
-				//echo "<button type='submit' name='selection' class='button large selection' value='Cancel'>Cancel my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button large selection' value='View'>View my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button large selection' value='Reschedule'>Reschedule my appointment</button><br>";
+				echo "<button type='submit' name='selection' class='button large selection' value='Cancel'>Cancel my appointment</button><br>";
 			}
 			else{
 				if($canceled == true){
