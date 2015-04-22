@@ -247,10 +247,10 @@ $COMMON = new Common($debug);
         </div>
 	    <div class="finishButton">
 			<form action = "StudProcessCancel.php" method = "post" name = "Cancel">
-			<input type="submit" name="finish" class="button large go" value="Cancel">
-			<input type="submit" name="finish" class="button large" value="Keep">
+			<input type="submit" name="cancel" class="button large go" value="Cancel">
+			<input type="submit" name="cancel" class="button large" value="Keep">
 			</form>
-			<p>Click "Cancel" to cancel appointment. Click "Keep" to discard changes.</p>
+			<p>Click "Cancel" to cancel appointment. Click "Keep" to keep appointment.</p>
 	    </div>
 		</div>
 		</form>

@@ -18,12 +18,14 @@
       }
 
       a{ 
-      color: #07f; 
-      text-decoration: none; 
+      color: #000066; 
+      text-decoration: none;
+	  line-height: 40px;
       }
 
       a:hover{ 
-      text-decoration: underline; 
+      text-decoration: underline;
+	  line-height: 40px;
       }
 
       #login{ 
@@ -32,13 +34,13 @@
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 500px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
       }
 
-	h1{ 
+	  h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -119,8 +121,8 @@
       }
       
       .button.large {
-        font-size: 24px;
-        height: 48px;
+        font-size: 16px;
+        height: 32px;
         padding: 0 16px;
 		position: center;
       }
@@ -133,6 +135,16 @@
       .button.go:hover {
         background-color: #70B74E;
         color: #FFF;
+      }
+
+      .button.selection {
+        background-color: #FFFFFF;
+        color: #003399;
+      }
+      
+      .button.selection:hover {
+        background-color: #99CCFF;
+        color: #003399;
       }
        
       .field{ 
@@ -176,6 +188,18 @@
       margin: 0; 
       padding: 0; 
       }
+	  
+	  .button-item{ 
+      line-height: 32px; 
+      margin: 8px 0px 12px; 
+      }
+       
+      .button-item .button{ 
+      margin-right: 4px; 
+      width: 70px; 
+      padding: 0 8px; 
+      text-align: center; 
+      }
 
       .login-create{ 
       font-size: 16px; 
@@ -195,25 +219,25 @@
       <div id="form">
         <div class="top">
         <form method="link" action="AdminScheduleApp.html">
-	<input type="submit" name="next" class="button large go" value="Schedule appointments">
+	<input type="submit" name="next" class="button large selection" value="Schedule appointments">
 	</form>
 	
 	<br />
 
 	<form method="link" action="AdminPrintSchedule.html">
-	<input type="submit" name="next" class="button large go" value="Print schedule for a day">
+	<input type="submit" name="next" class="button large selection" value="Print schedule for a day">
 	</form>
 
 	<br />
 
 	<form method="link" action="AdminEditApp.html">
-	<input type="submit" name="next" class="button large go" value="Edit appointments">
+	<input type="submit" name="next" class="button large selection" value="Edit appointments">
 	</form>
 
 	<br />
 
 	<form method="link" action="AdminSearchApp.html">
-	<input type="submit" name="next" class="button large go" value="Search for an appointment">
+	<input type="submit" name="next" class="button large selection" value="Search for an appointment">
 	</form>
 
 	<br />
