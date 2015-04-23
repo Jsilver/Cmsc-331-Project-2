@@ -263,6 +263,7 @@ session_start();
 				echo "<button type='submit' name='selection' class='button large selection' value='Reschedule'>Reschedule my appointment</button><br>";
 				echo "<button type='submit' name='selection' class='button large selection' value='Cancel'>Cancel my appointment</button><br>";
 			}
+			echo "<button type='submit' name='selection' class='button large selection' value='Search'>Search for appointment</button><br>";
 			echo "<button type='submit' name='selection' class='button large selection' value='Edit'>Edit student information</button><br>";
 		?>
 		</form>

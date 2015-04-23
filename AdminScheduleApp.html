@@ -32,7 +32,7 @@
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 600px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -96,7 +96,7 @@
         height: 25px;
         overflow: visible;
         padding: 0 12px;
-        margin: 5px auto 0;
+        
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -119,10 +119,10 @@
       }
       
       .button.large {
-        font-size: 24px;
-        height: 48px;
+        font-size: 16px;
+        height: 32px;
         padding: 0 16px;
-		position: center;
+	position: center;
       }
       
       .button.go {
@@ -177,6 +177,18 @@
       padding: 0; 
       }
 
+	.button-item{ 
+      line-height: 32px; 
+      margin: 8px 0px 12px; 
+      }
+       
+      .button-item .button{ 
+      margin-right: 4px; 
+      width: 70px; 
+      padding: 0 8px; 
+      text-align: center; 
+      }
+
       .login-create{ 
       font-size: 16px; 
       font-weight: normal; 
@@ -195,19 +207,16 @@
       <div id="form">
         <div class="top">
 	<h1>Schedule Appointments</h1>
-        <form method="link" action="AdminScheduleGroup.php">
-	<input type="submit" name="next" class="button large go" value="Group appointments">
+	<h2>Select advising type</h2><br>
+	
+	<form method="link" action="AdminScheduleInd.php">
+	<input type="submit" name="next" class="button large go" style="margin: 5px 240px" value="Individual">
+	</form>
+
+	<form method="link" action="AdminScheduleGroup.php">
+	<input type="submit" name="next" class="button large go" style="margin: 5px 253px" value="Group">
 	</form>
 	
-	<br />
-
-	<form method="link" action="AdminScheduleInd.php">
-	<input type="submit" name="next" class="button large go" value="Individual appointments">
-	</form>
-          
-        </div>
-        <div class="field">
-          
         </div>
 	</div>
 		

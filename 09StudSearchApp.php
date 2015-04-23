@@ -1,8 +1,14 @@
-<!DOCTYPE html>
+<?php
+session_start();
+$debug = false;
+include('../CommonMethods.php');
+$COMMON = new Common($debug);
+?>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Edit Appointment</title>
+    <title>Search for Appointment</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -18,12 +24,14 @@
       }
 
       a{ 
-      color: #07f; 
-      text-decoration: none; 
+      color: #000066; 
+      text-decoration: none;
+	  line-height: 40px;
       }
 
       a:hover{ 
-      text-decoration: underline; 
+      text-decoration: underline;
+	  line-height: 40px;
       }
 
       #login{ 
@@ -32,13 +40,13 @@
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 500px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
       }
 
-	h1{ 
+	  h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -65,7 +73,7 @@
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], textarea {
+      input[type="text"],input[type="email"], input[type="radio"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -75,7 +83,7 @@
         padding: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
-        width: 262px;
+        width: 20px;
       }
 	  
 	  select{
@@ -96,7 +104,7 @@
         height: 25px;
         overflow: visible;
         padding: 0 12px;
-
+        margin: 5px auto 0;
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -134,6 +142,16 @@
         background-color: #70B74E;
         color: #FFF;
       }
+
+      .button.selection {
+        background-color: #FFFFFF;
+        color: #003399;
+      }
+      
+      .button.selection:hover {
+        background-color: #99CCFF;
+        color: #003399;
+      }
        
       .field{ 
       margin: 8px 0; 
@@ -141,8 +159,9 @@
 
       .field label{ 
       display: block; 
-      font-weight: bold; 
-      font-size: 14px; 
+      font-size: 16px;
+	font-weight: bold; 
+	margin-left: 10px;
       }
 	  
       .actions{ 
@@ -176,6 +195,18 @@
       margin: 0; 
       padding: 0; 
       }
+	  
+	  .button-item{ 
+      line-height: 32px; 
+      margin: 8px 0px 12px; 
+      }
+       
+      .button-item .button{ 
+      margin-right: 4px; 
+      width: 70px; 
+      padding: 0 8px; 
+      text-align: center; 
+      }
 
       .login-create{ 
       font-size: 16px; 
@@ -194,23 +225,24 @@
     <div id="login">
       <div id="form">
         <div class="top">
-	<h1>Edit Appointments</h1>
-	<h2>Select advising type</h2><br>
+		<h1>Search for Appointment</h1>
+	    <div class="field">
+		<form action="11StudSearchResult.php" method="post" name="SearchApp">
+			<label for="month">Month 
+			<select id="month" name="month">
+			<option value diabled selected>March/April/May</option>
+			<option>March</option>
+			<option>April</option>
+			<option>May</option>
+			</select></label>
 
-	<form method="link" action="AdminEditInd.html">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 240px" value="Individual">
-	</form>
-
-        <form method="link" action="AdminEditGroup.html">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 253px" value="Group">
-	</form>
-          
-        </div>
-        <div class="field">
-          
-        </div>
-	</div>
 		
+	    
+        </div>
+	    <div class="nextButton">
+			<input type="submit" name="next" class="button large go" value="Next">
+	    </div>
+		</div>
+		</form>
   </body>
-  
 </html>

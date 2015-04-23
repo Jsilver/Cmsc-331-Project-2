@@ -182,7 +182,7 @@ session_start();
       padding: 0; 
       }
 	  
-	  .button-item{ 
+	.button-item{ 
       line-height: 32px; 
       margin: 8px 0px 12px; 
       }
@@ -211,6 +211,7 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
+		<h1>Schedule Appointment</h1>
 		<h2>What kind of advising appointment would you like?</h2><br>
 	<form action="StudProcessType.php" method="post" name="SelectType">
 	<div class="nextButton">

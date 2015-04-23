@@ -221,26 +221,20 @@
         <form method="link" action="AdminScheduleApp.html">
 	<input type="submit" name="next" class="button large selection" value="Schedule appointments">
 	</form>
-	
-	<br />
 
 	<form method="link" action="AdminPrintSchedule.html">
 	<input type="submit" name="next" class="button large selection" value="Print schedule for a day">
 	</form>
 
-	<br />
-
 	<form method="link" action="AdminEditApp.html">
 	<input type="submit" name="next" class="button large selection" value="Edit appointments">
 	</form>
-
-	<br />
 
 	<form method="link" action="AdminSearchApp.html">
 	<input type="submit" name="next" class="button large selection" value="Search for an appointment">
 	</form>
 
-	<br />
+	<br>
 
 	<form method="link" action="StudentAdminSignIn.html">
 	<input type="submit" name="next" class="button large go" value="Log Out">
