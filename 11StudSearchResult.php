@@ -227,42 +227,11 @@ $COMMON = new Common($debug);
         <div class="top">
 		<h1>Search for Appointments</h1>
 	    <div class="field">
-		<form action="11StudSearchResult.php" method="post" name="SearchApp">
-			<label for="date">Date</label>
-	      		<input id="date" type="date" name="date" autofocus> (mm/dd/yyyy)
+		<form action="02StudHome.php" method="post" name="SearchApp">
 			
-			<label for="time">Time</label><span style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
-			<input type="checkbox" name="time" value="8:00"> 8:00am - 8:30am<br>
-			<input type="checkbox" name="time" value="8:30"> 8:30am - 9:00am<br>
-			<input type="checkbox" name="time" value="9:00"> 9:00am - 9:30am<br>
-			<input type="checkbox" name="time" value="9:30"> 9:30am - 10:00am<br>
-			<input type="checkbox" name="time" value="10:00"> 10:00am - 10:30am<br>
-			<input type="checkbox" name="time" value="10:30"> 10:30am - 11:00am<br>
-			<input type="checkbox" name="time" value="11:00"> 11:00am - 11:30am<br>
-			<input type="checkbox" name="time" value="11:30"> 11:30am - 12:00pm<br>
-			<input type="checkbox" name="time" value="12:00"> 12:00pm - 12:30pm<br>
-			<input type="checkbox" name="time" value="12:30"> 12:30pm - 1:00pm<br>
-			<input type="checkbox" name="time" value="13:00"> 1:00pm - 1:30pm<br>
-			<input type="checkbox" name="time" value="13:30"> 1:30pm - 2:00pm<br>
-			<input type="checkbox" name="time" value="14:00"> 2:00pm - 2:30pm<br>
-			<input type="checkbox" name="time" value="14:30"> 2:30pm - 3:00pm<br>
-			<input type="checkbox" name="time" value="15:00"> 3:00pm - 3:30pm<br>
-			<input type="checkbox" name="time" value="15:30"> 3:30pm - 4:00pm<br></span>
-
-			<label for="advisor">Advisor</label>
-	      		<select id="advisor" name="advisor">
-			<option></option>
-			<?php
-			$sql = "select * from Proj1Advisors";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			while($row = mysql_fetch_row($rs)){
-				echo "<option>$row[1]</option>";
-			}
-			?>
-			</select>
         </div>
 	    <div class="nextButton">
-			<input type="submit" name="go" class="button large go" value="Go">
+			<input type="submit" name="done" class="button large go" value="Done">
 	    </div>
 		</div>
 		</form>
