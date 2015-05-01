@@ -9,6 +9,11 @@ $localAdvisor = $_SESSION["advisor"];
 $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
+
+$sql = "select * from Proj2Advisors where `id` = '$localAdvisor'";
+$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+$row = mysql_fetch_row($rs);
+$advisorName = $row[1]." ".$row[2];
 ?>
 
 <html lang="en">
@@ -235,13 +240,13 @@ $COMMON = new Common($debug);
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
 			if ($_SESSION["advisor"] != "Group"){
-				$sql = "select * from Proj1AppointmentsIndiv where `IsOpen` = 1 and `AdvisorName` = '$localAdvisor'";
+				$sql = "select * from Proj2Appointments where `AdvisorID` = '$localAdvisor' and `EnrolledNum` = 0";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
-				echo "<label for='prompt'>Select appointment with ",$_SESSION["advisor"],":</label><br>";
+				echo "<label for='prompt'>Select appointment with ",$advisorName,":</label><br>";
 			}
 			else{
-				$sql = "select * from Proj1AppointmentsGroup where `Enrolled` < `Max`";
+				$sql = "select * from Proj2Appointments where `AdvisorID` = 0 and `EnrolledNum` < `Max`";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Group Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment:</label><br>";
