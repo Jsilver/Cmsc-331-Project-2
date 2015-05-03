@@ -218,26 +218,36 @@
     <div id="login">
       <div id="form">
         <div class="top">
-        <form method="link" action="AdminScheduleApp.html">
-	<input type="submit" name="next" class="button large selection" value="Schedule appointments">
-	</form>
+	<h2>
+	<?php
+		$debug = false;
+		include('../CommonMethods.php');
+		$COMMON = new Common($debug);
 
-	<form method="link" action="AdminPrintSchedule.html">
-	<input type="submit" name="next" class="button large selection" value="Print schedule for a day">
-	</form>
+		$sql = "select firstName from Proj2Advisors 
+			where `Username` = $_SESSION["UserN"] 
+			and `Password` = $_SESSION["PassW"]";
 
-	<form method="link" action="AdminEditApp.html">
-	<input type="submit" name="next" class="button large selection" value="Edit appointments">
-	</form>
+		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 
-	<form method="link" action="AdminSearchApp.html">
-	<input type="submit" name="next" class="button large selection" value="Search for an appointment">
+		$firstN = $rs;
+		echo $firstN;
+	?>
+	</h2>
+	
+	<form action="AdminProcessUI.php" method="post" name="UI">
+  
+		<input type="submit" name="next" class="button large selection" value="Schedule appointments">
+		<input type="submit" name="next" class="button large selection" value="Print schedule for a day">
+		<input type="submit" name="next" class="button large selection" value="Edit appointments">
+		<input type="submit" name="next" class="button large selection" value="Search for an appointment">
+		<input type="submit" name="next" class="button large selection" value="Create new Admin Account">
+	
 	</form>
-
 	<br>
 
 	<form method="link" action="StudentAdminSignIn.html">
-	<input type="submit" name="next" class="button large go" value="Log Out">
+		<input type="submit" name="next" class="button large go" value="Log Out">
 	</form>
           
         </div>

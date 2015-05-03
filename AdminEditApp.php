@@ -1,14 +1,12 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Search Appointments</title>
-    <script type="text/javascript">
-    function saveValue(target){
-	var stepVal = document.getElementById(target).value;
-	alert("Value: " + stepVal);
-    }
-    </script>
+    <title>Edit Appointment</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -102,7 +100,7 @@
         height: 25px;
         overflow: visible;
         padding: 0 12px;
-        margin: 5px auto 0;
+
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -200,48 +198,22 @@
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Search Appointments</h1>
-        <form action="SearchResults.html" method="post" name="Confirm">
-	    <div class="field">
-	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" required autofocus>  (mm/dd/yyyy)
-	    </div>
+	<h1>Edit Appointments</h1>
+	<h2>Select advising type</h2><br>
 
-	    <div class="field">
-	      <label for="time">Time</label><span style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
-		<input type="checkbox" name="time" value="8:00"> 8:00am - 8:30am<br>
-		<input type="checkbox" name="time" value="8:30"> 8:30am - 9:00am<br>
-		<input type="checkbox" name="time" value="9:00"> 9:00am - 9:30am<br>
-		<input type="checkbox" name="time" value="9:30"> 9:30am - 10:00am<br>
-		<input type="checkbox" name="time" value="10:00"> 10:00am - 10:30am<br>
-		<input type="checkbox" name="time" value="10:30"> 10:30am - 11:00am<br>
-		<input type="checkbox" name="time" value="11:00"> 11:00am - 11:30am<br>
-		<input type="checkbox" name="time" value="11:30"> 11:30am - 12:00pm<br>
-		<input type="checkbox" name="time" value="12:00"> 12:00pm - 12:30pm<br>
-		<input type="checkbox" name="time" value="12:30"> 12:30pm - 1:00pm<br>
-		<input type="checkbox" name="time" value="13:00"> 1:00pm - 1:30pm<br>
-		<input type="checkbox" name="time" value="13:30"> 1:30pm - 2:00pm<br>
-		<input type="checkbox" name="time" value="14:00"> 2:00pm - 2:30pm<br>
-		<input type="checkbox" name="time" value="14:30"> 2:30pm - 3:00pm<br>
-		<input type="checkbox" name="time" value="15:00"> 3:00pm - 3:30pm<br>
-		<input type="checkbox" name="time" value="15:30"> 3:30pm - 4:00pm<br></span>
-	    </div>
+	<form method="post" action="AdminProcessEdit.php">
 
-	    <div class="field">
-	      <label for="Advisor">Advisor</label>
-	      <select id="Advisor" name="Advisor">
-		<option></option>
-		<option>Josh Abrams</option>
-		<option>Anne Arey</option>
-		<option>Emily Stephens</option>
-		</select>
-	    </div>
+	<input type="submit" name="next" class="button large go"  value="Individual">
+	<input type="submit" name="next" class="button large go"  value="Group">
 
-	<div class="nextButton">
-			<input type="submit" name="go" class="button large go" value="Go">
-	</div>
-	</div>
 	</form>
+          
+        </div>
+        <div class="field">
+          
+        </div>
+	</div>
+		
   </body>
   
 </html>

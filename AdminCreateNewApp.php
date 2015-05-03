@@ -1,8 +1,12 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Edit Appointment</title>
+    <title>Select Appointment Type</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -96,7 +100,7 @@
         height: 25px;
         overflow: visible;
         padding: 0 12px;
-
+        
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -122,7 +126,7 @@
         font-size: 16px;
         height: 32px;
         padding: 0 16px;
-		position: center;
+	position: center;
       }
       
       .button.go {
@@ -177,6 +181,18 @@
       padding: 0; 
       }
 
+	.button-item{ 
+      line-height: 32px; 
+      margin: 8px 0px 12px; 
+      }
+       
+      .button-item .button{ 
+      margin-right: 4px; 
+      width: 70px; 
+      padding: 0 8px; 
+      text-align: center; 
+      }
+
       .login-create{ 
       font-size: 16px; 
       font-weight: normal; 
@@ -190,27 +206,17 @@
       }
     </style>
   </head>
-  <body>
+   <body>
     <div id="login">
       <div id="form">
         <div class="top">
-	<h1>Edit Appointments</h1>
-	<h2>Select advising type</h2><br>
-
-	<form method="link" action="AdminEditInd.html">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 240px" value="Individual">
-	</form>
-
-        <form method="link" action="AdminEditGroup.html">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 253px" value="Group">
-	</form>
-          
-        </div>
-        <div class="field">
-          
-        </div>
+		<form method="link" action="AdminUI.php">
+			<input type="submit" name="next" class="button large go" value="Return to Home">
+		</form>
 	</div>
-		
+	</div>
+	</div>
+	</form>
   </body>
   
 </html>

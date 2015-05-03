@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -201,10 +205,17 @@
       <div id="form">
         <div class="top">
 		<h1>Print Schedule</h1>
-        <form action="PrintSchedule.html" method="post" name="Confirm">
+        <form action="AdminPrintResults.php" method="post" name="Confirm">
 	    <div class="field">
-	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" required autofocus>
+	     	<label for="Date">Date</label>
+	   	<input id="Date" type="date" name="Date" required autofocus>
+
+		<label for="Type">Type of Appointment</label>
+              	<select id="major" name = "major">
+			<option>Individual</option>
+			<option>Group</option>
+			<option>Both</option>
+		</select>
 	    </div>
 
 	<br>

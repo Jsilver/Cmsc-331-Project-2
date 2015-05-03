@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Schedule Group Appointment</title>
+    <title>Print Schedule</title>
     <script type="text/javascript">
     function saveValue(target){
 	var stepVal = document.getElementById(target).value;
@@ -204,55 +204,10 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Schedule Group Appointments</h1>
-        <form action="AdminConfirmScheGroupApp.php" method="post" name="Confirm">
-	    <div class="field">
-	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" required autofocus>
-	    </div>
-
-	    <div class="field">
-	      <label for="Time">Time</label>
-	      <select id="Time" name="Time">
-		<option>9:00AM-9:30AM</option>
-		<option>9:30AM-10:00AM</option>
-		<option>10:00AM-10:30AM</option>
-		<option>10:30AM-11:00AM</option>
-		<option>11:00AM-11:30AM</option>
-		<option>11:30AM-12:00PM</option>
-		<option>12:00PM-12:30PM</option>
-		<option>12:30PM-1:00PM</option>
-		<option>1:00PM-1:30PM</option>
-		<option>1:30PM-2:00PM</option>
-		<option>2:00PM-2:30PM</option>
-		<option>2:30PM-3:00PM</option>
-		<option>3:00PM-3:30PM</option>
-		<option>3:30PM-4:00PM</option>
-		</select>
-	    </div>
-
-        <div class="field">
-            <label for="Repeat">Repeat Weekly</label>
-            <input type="checkbox" name="Repeat" value="Monday">Monday
-            <input type="checkbox" name="Repeat" value="Tuesday">Tuesday
-            <input type="checkbox" name="Repeat" value="Wednesday">Wednesday
-            <input type="checkbox" name="Repeat" value="Thursday">Thursday
-            <input type="checkbox" name="Repeat" value="Friday">Friday
-        </div>
-
-        <div class="field">
-        	<h3>Repeat for
-        	<input type="number" id="stepper" name="stepper" min="0" max="4" value="0" />
-		weeks</h3>
-        </div>
-
-	<div class="field">
-        	<h3>Student limit: 
-        	<input type="number" id="stepper1" name="stepper1" min="1" max="10" value="10" /></h3>
-        </div>
-
-	<div class="nextButton">
-		<input type="submit" name="next" class="button large go" value="Next">
+		<form method="link" action="AdminUI.php">
+			<input type="submit" name="next" class="button large go" value="Return to Home">
+		</form>
+	</div>
 	</div>
 	</div>
 	</form>

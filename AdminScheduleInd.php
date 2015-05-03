@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -201,7 +205,7 @@
       <div id="form">
         <div class="top">
 		<h1>Schedule Individual Appointments</h1>
-        <form action="ConfirmIndvApp.html" method="post" name="Confirm">
+        <form action="AdminConfirmScheIndApp.html" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
 	      <input id="Date" type="date" name="Date" required autofocus>

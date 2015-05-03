@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -209,12 +213,9 @@
 	<h1>Schedule Appointments</h1>
 	<h2>Select advising type</h2><br>
 	
-	<form method="link" action="AdminScheduleInd.php">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 240px" value="Individual">
-	</form>
-
-	<form method="link" action="AdminScheduleGroup.php">
-	<input type="submit" name="next" class="button large go" style="margin: 5px 253px" value="Group">
+	<form method="link" action="AdminProcessSchedule.php">
+		<input type="submit" name="next" class="button large go"  value="Individual">
+		<input type="submit" name="next" class="button large go"  value="Group">
 	</form>
 	
         </div>
