@@ -221,56 +221,28 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Hello 
-		<?php
-			echo $_SESSION["firstN"];
-		?>
-        </h2>
-	    <div class="selections">
-		<form action="StudProcessHome.php" method="post" name="Home">
+	    <div class="statusMessage">
 	    <?php
-			$debug = false;
-			include('../CommonMethods.php');
-			$COMMON = new Common($debug);
-			
-			$_SESSION["studExist"] = false;
-			$canceled = false;
-			$studid = $_SESSION["studID"];
-
-			$sql = "select * from Proj2Students where `StudentID` = '$studid'";
-			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			$row = mysql_fetch_row($rs);
-			
-			if (!empty($row)){
-				$_SESSION["studExist"] = true;
-				if($row[6] == true){
-					$canceled = true;
-				}
+			if($_SESSION["status"] == "complete"){
+				echo "You have completed your sign-up for an advising appointment.";
 			}
-
-			if ($_SESSION["studExist"] == false){
-				echo "<button type='submit' name='selection' class='button large selection' value='Signup'>Signup for an appointment</button><br>";
-
-				echo "<button type='submit' name='selection' class='button large selection' value='View'>View my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button large selection' value='Reschedule'>Reschedule my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button large selection' value='Cancel'>Cancel my appointment</button><br>";
+			elseif($_SESSION["status"] == "none"){
+				echo "You did not sign up for an advising appointment.";
 			}
-			else{
-				if($canceled == true){
-					echo "Alert!<br>";
-				}
-				echo "<button type='submit' name='selection' class='button large selection' value='View'>View my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button large selection' value='Reschedule'>Reschedule my appointment</button><br>";
-				echo "<button type='submit' name='selection' class='button large selection' value='Cancel'>Cancel my appointment</button><br>";
+			if($_SESSION["status"] == "cancel"){
+				echo "You have cancelled your advising appointment.";
 			}
-			echo "<button type='submit' name='selection' class='button large selection' value='Search'>Search for appointment</button><br>";
-			echo "<button type='submit' name='selection' class='button large selection' value='Edit'>Edit student information</button><br>";
+			if($_SESSION["status"] == "resch"){
+				echo "You have changed your advising appointment.";
+			}
+			if($_SESSION["status"] == "keep"){
+				echo "No changes have been made to your advising appointment.";
+			}
 		?>
-		</form>
         </div>
-		<form action="Logout.php" method="post" name="Logout">
-	    <div class="logoutButton">
-			<input type="submit" name="logout" class="button large go" value="Logout">
+		<form action="02StudHome.php" method="post" name="complete">
+	    <div class="returnButton">
+			<input type="submit" name="return" class="button large go" value="Return to Home">
 	    </div>
 		</div>
 		</form>

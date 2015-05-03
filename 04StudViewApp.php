@@ -3,6 +3,8 @@ session_start();
 $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
+
+$studID = $_SESSION["studID"];
 ?>
 
 <html lang="en">
@@ -105,7 +107,7 @@ $COMMON = new Common($debug);
         overflow: visible;
         padding: 0 12px;
         position: relative;
-		margin-left: -50px;
+		margin-left: -80px;
 		left: 50%;
         text-decoration: none;
         vertical-align: top;
@@ -229,25 +231,27 @@ $COMMON = new Common($debug);
 		<h1>View Appointment</h1>
 	    <div class="field">
 	    <?php
-			$sql = "select * from Proj1Students";
+			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			 
-			while($row = mysql_fetch_row($rs)){
-				if($row[3] == $_SESSION["studID"]){
-					$datephp = strtotime($row[6]);
-					echo "<label for='info'>";
-					echo "Advisor: ", $row[5], "<br>";
-					echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
-				}
-				$datephp = strtotime($row[6]);
-					echo "<label for='info'>";
-					echo "Advisor: ", $row[5], "<br>";
-					echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
+			$row = mysql_fetch_row($rs);
+			$advisorID = $row[2];
+			$datephp = strtotime($row[1]);
+			
+			if($advisorID != 0){
+				$sql2 = "select * from Proj2Advisors where `id` = '$advisorID'";
+				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
+				$row2 = mysql_fetch_row($rs);
+				$advisorName = $row2[1] . " " . $row2[2];
 			}
+			else{$advisorName = "Group";}
+			
+			echo "<label for='info'>";
+			echo "Advisor: ", $advisorName, "<br>";
+			echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
 		?>
         </div>
 	    <div class="finishButton">
-			<button onclick="location.href = '02StudHome.php'" class="button large go" >Done</button>
+			<button onclick="location.href = '02StudHome.php'" class="button large go" >Return to Home</button>
 	    </div>
 		</div>
 		</form>

@@ -226,33 +226,45 @@ $_SESSION["appTime"] = $_POST["appTime"];
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
 	    <?php
-			
 			if(isset($_SESSION["resch"])){
 				echo "<h2>Previous Appointment</h2>";
 				$debug = false;
 				include('../CommonMethods.php');
 				$COMMON = new Common($debug);
-				$sql = "select * from Proj1Students";
+				
+				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-				 
-				while($row = mysql_fetch_row($rs)){
-					if($row[3] == $_SESSION["studID"]){
-						$datephp = strtotime($row[6]);
-						echo "<label for='oldinfo'>";
-						echo "Advisor: ", $row[5], "<br>";
-						echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
-					}
-					//to be deleted
-					$datephp = strtotime($row[6]);
-						echo "<label for='oldinfo'>";
-						echo "Advisor: ", $row[5], "<br>";
-						echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label><br>";
+				$row = mysql_fetch_row($rs);
+				$advisorID = $row[2];
+				$datephp = strtotime($row[1]);
+				
+				if($advisorID != 0){
+					$sql2 = "select * from Proj2Advisors where `id` = '$advisorID'";
+					$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
+					$row2 = mysql_fetch_row($rs);
+					$advisorName = $row2[1] . " " . $row2[2];
 				}
+				else{$advisorName = "Group";}
+				
+				echo "<label for='info'>";
+				echo "Advisor: ", $advisorName, "<br>";
+				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
+				
 			}
+			
+			$currentAdvisorName;
+			$currentAdvisorID = $_SESSION["advisor"];
+			if($currentAdvisorID != 0){
+				$sql2 = "select * from Proj2Advisors where `id` = '$currentAdvisorID'";
+				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
+				$row2 = mysql_fetch_row($rs);
+				$currentAdvisorName = $row2[1] . " " . $row2[2];
+			}
+			else{$currentAdvisorName = "Group";}
 			echo "<h2>Current Appointment</h2>";
 			$datephp = strtotime($_SESSION["appTime"]);
 			echo "<label for='newinfo'>";
-			echo "Advisor: ",$_SESSION["advisor"],"<br>";
+			echo "Advisor: ",$currentAdvisorName,"<br>";
 			echo "Appointment: ",date('l, F d, Y g:i A', $datephp),"</label>";
 		?>
         </div>

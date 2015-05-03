@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>UMBC CSEE Undergraduate Advising Student Sign In</title>
+    <title>UMBC COEIT Engineering and Computer Science Advising Student Sign In</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -194,7 +194,7 @@
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>CSEE Advising<span class="login-create"></span></h1>
+		<h1>COEIT Engineering and Computer Science Advising<span class="login-create"></span></h1>
 		<h2>Sign In<span class="login-create"></span></h2>
         <form action="StudProcessSignIn.php" method="post" name="SignIn">
 	    <div class="field">
@@ -207,11 +207,11 @@
 	    </div>
         <div class="field">
             <label for="studID">Student ID</label>
-            <input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" name="studID" required>
+            <input id="studID" size="30" maxlength="7" type="text" pattern="[A-Za-z]{2}[0-9]{5}" title="AB12345" placeholder="AB12345" name="studID" required>
         </div>
 		<div class="field">
             <label for="email">E-mail</label>
-            <input id="email" size="30" maxlength="255" type="email" name="email" required>
+            <input id="email" size="30" maxlength="255" type="email" name="email" placeholder="student1@umbc.edu" required>
         </div>
         <div class="field">
               <label for="major">Major</label>
