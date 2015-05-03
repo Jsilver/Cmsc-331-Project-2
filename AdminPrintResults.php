@@ -204,6 +204,39 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
+		<?php
+			$date = $_POST["Date"];
+			$type = $_POST["type"];
+			
+			$debug = false;
+			include('../CommonMethods.php');
+			$COMMON = new CommonMethods($debug);
+		
+			echo("<h2>Schedule for $date</h2><br>");
+			if($_POST["type"] == 'Both'){
+				echo("<h3>Group Appointments"</h3><br>);
+				$sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
+				WHERE `Time` LIKE '$date%'";
+				////Incomplete
+
+				echo("<h3>Individual Appointments"</h3><br>);
+			}
+			elseif($_POST["type" == 'Individual']){
+				echo("<h3>Individual Appointments</h3><br>");
+
+
+
+			}
+			elseif($_POST["type" == 'Group']){
+				echo("<h3>Group Appointments</h3><br>");
+
+
+
+			}
+	
+			echo ($date);
+			echo ($type);
+		?>
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
 		</form>

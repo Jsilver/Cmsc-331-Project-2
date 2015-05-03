@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -218,30 +222,34 @@
     <div id="login">
       <div id="form">
         <div class="top">
-	<h2>
+	<h2> Hello 
 	<?php
 		$debug = false;
 		include('../CommonMethods.php');
-		$COMMON = new Common($debug);
+		$COMMON = new CommonMethods($debug);
 
-		$sql = "select firstName from Proj2Advisors 
-			where `Username` = $_SESSION["UserN"] 
-			and `Password` = $_SESSION["PassW"]";
+		$User = $_SESSION["UserN"];
+		$Pass = $_SESSION["PassW"];
+		$sql = "SELECT `firstName` FROM `Proj2Advisors` 
+			WHERE `Username` = '$User' 
+			and `Password` = '$Pass'";
 
-		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-
-		$firstN = $rs;
+		$rs = $COMMON->executeQuery($sql, "Advising Appointments");
+		$row = mysql_fetch_row($rs);
+		foreach($row as $element){
+			$firstN = $element;
+		}
 		echo $firstN;
 	?>
 	</h2>
 	
 	<form action="AdminProcessUI.php" method="post" name="UI">
   
-		<input type="submit" name="next" class="button large selection" value="Schedule appointments">
-		<input type="submit" name="next" class="button large selection" value="Print schedule for a day">
-		<input type="submit" name="next" class="button large selection" value="Edit appointments">
-		<input type="submit" name="next" class="button large selection" value="Search for an appointment">
-		<input type="submit" name="next" class="button large selection" value="Create new Admin Account">
+		<input type="submit" name="next" class="button large selection" value="Schedule appointments"><br>
+		<input type="submit" name="next" class="button large selection" value="Print schedule for a day"><br>
+		<input type="submit" name="next" class="button large selection" value="Edit appointments"><br>
+		<input type="submit" name="next" class="button large selection" value="Search for an appointment"><br>
+		<input type="submit" name="next" class="button large selection" value="Create new Admin Account"><br>
 	
 	</form>
 	<br>

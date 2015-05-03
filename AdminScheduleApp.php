@@ -22,12 +22,14 @@ session_start();
       }
 
       a{ 
-      color: #07f; 
-      text-decoration: none; 
+      color: #000066; 
+      text-decoration: none;
+	  line-height: 40px;
       }
 
       a:hover{ 
-      text-decoration: underline; 
+      text-decoration: underline;
+	  line-height: 40px;
       }
 
       #login{ 
@@ -42,7 +44,7 @@ session_start();
       border-radius: 8px; 
       }
 
-	h1{ 
+	  h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -100,7 +102,7 @@ session_start();
         height: 25px;
         overflow: visible;
         padding: 0 12px;
-        
+        margin: 5px 90px;
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -180,7 +182,7 @@ session_start();
       margin: 0; 
       padding: 0; 
       }
-
+	  
 	.button-item{ 
       line-height: 32px; 
       margin: 8px 0px 12px; 
@@ -213,9 +215,11 @@ session_start();
 	<h1>Schedule Appointments</h1>
 	<h2>Select advising type</h2><br>
 	
-	<form method="link" action="AdminProcessSchedule.php">
-		<input type="submit" name="next" class="button large go"  value="Individual">
-		<input type="submit" name="next" class="button large go"  value="Group">
+	<form method="post" action="AdminProcessSchedule.php">
+	<div class="nextButton">
+		<input type="submit" name="next" class="button large go" value="Individual">
+		<input type="submit" name="next" class="button large go" value="Group">
+	</div>
 	</form>
 	
         </div>

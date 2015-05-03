@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Select Appointment Type</title>
+    <title>Admin Home</title>
     <style type="text/css">
       html{ 
       background-color: 
@@ -22,12 +22,14 @@ session_start();
       }
 
       a{ 
-      color: #07f; 
-      text-decoration: none; 
+      color: #000066; 
+      text-decoration: none;
+	  line-height: 40px;
       }
 
       a:hover{ 
-      text-decoration: underline; 
+      text-decoration: underline;
+	  line-height: 40px;
       }
 
       #login{ 
@@ -36,7 +38,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 500px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -69,7 +71,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], input[type="password"], textarea {
+      input[type="text"],input[type="email"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -138,6 +140,16 @@ session_start();
         background-color: #70B74E;
         color: #FFF;
       }
+
+      .button.selection {
+        background-color: #FFFFFF;
+        color: #003399;
+      }
+      
+      .button.selection:hover {
+        background-color: #99CCFF;
+        color: #003399;
+      }
        
       .field{ 
       margin: 8px 0; 
@@ -180,6 +192,18 @@ session_start();
       margin: 0; 
       padding: 0; 
       }
+	  
+	  .button-item{ 
+      line-height: 32px; 
+      margin: 8px 0px 12px; 
+      }
+       
+      .button-item .button{ 
+      margin-right: 4px; 
+      width: 70px; 
+      padding: 0 8px; 
+      text-align: center; 
+      }
 
       .login-create{ 
       font-size: 16px; 
@@ -194,47 +218,52 @@ session_start();
       }
     </style>
   </head>
-   <body>
+  <body>
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Creating new Adivsor Account</h2>
-		
-		<form action="AdminProcessMakeNew.php" method="post" name="Create">
-		<div class="field">
-	      		<label for="firstN">First Name</label>
-	      		<input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
-	    	</div>
+	<h2>
+	<?php
+		$debug = false;
+		include('../CommonMethods.php');
+		$COMMON = new CommonMethods($debug);
 
-	    	<div class="field">
-	     		<label for="lastN">Last Name</label>
-	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>	
+		$User = $_SESSION["UserN"];
+		$Pass = $_SESSION["PassW"];
+		$sql = "SELECT `firstName` FROM `Proj2Advisors` 
+			WHERE `Username` = '$User' 
+			and `Password` = '$Pass'";
 
-		<div class="field">
-	     		<label for="UserN">Username</label>
-	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	
-
-		<div class="field">
-	     		<label for="PassW">Password</label>
-	      		<input id="PassW" size="20" maxlength="50" type="password" name="PassW" required>
-	   	</div>	
-
-		<div class="field">
-	     		<label for="ConfP">Confirm Password</label>
-	      		<input id="ConfP" size="20" maxlength="50" type="password" name="ConfP" required>
-	   	</div>	
-		<br>
-
-		<div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    	</div>
-
-	</div>
-	</div>
-	</div>
+		$rs = $COMMON->executeQuery($sql, "Advising Appointments");
+		$row = mysql_fetch_row($rs);
+		foreach($row as $element){
+			$firstN = $element;
+		}
+		echo $firstN;
+	?>
+	</h2>
+	
+	<form action="AdminProcessUI.php" method="post" name="UI">
+  
+		<input type="submit" name="next" class="button large selection" value="Schedule appointments"><br>
+		<input type="submit" name="next" class="button large selection" value="Print schedule for a day"><br>
+		<input type="submit" name="next" class="button large selection" value="Edit appointments"><br>
+		<input type="submit" name="next" class="button large selection" value="Search for an appointment"><br>
+		<input type="submit" name="next" class="button large selection" value="Create new Admin Account"><br>
+	
 	</form>
+	<br>
+
+	<form method="link" action="StudentAdminSignIn.html">
+		<input type="submit" name="next" class="button large go" value="Log Out">
+	</form>
+          
+        </div>
+        <div class="field">
+          
+        </div>
+	</div>
+		
   </body>
   
 </html>

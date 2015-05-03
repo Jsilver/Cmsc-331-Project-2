@@ -6,7 +6,13 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Select Appointment Type</title>
+    <title>Print Schedule</title>
+    <script type="text/javascript">
+    function saveValue(target){
+	var stepVal = document.getElementById(target).value;
+	alert("Value: " + stepVal);
+    }
+    </script>
     <style type="text/css">
       html{ 
       background-color: 
@@ -36,13 +42,13 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 600px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
       }
 
-	  h1{ 
+	h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -69,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], input[type="password"], textarea {
+      input[type="text"],input[type="email"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -194,43 +200,29 @@ session_start();
       }
     </style>
   </head>
-   <body>
+  <body>
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Creating new Adivsor Account</h2>
-		
-		<form action="AdminProcessMakeNew.php" method="post" name="Create">
-		<div class="field">
-	      		<label for="firstN">First Name</label>
-	      		<input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
-	    	</div>
+		<h2>New Advisor has been created</h2>
 
-	    	<div class="field">
-	     		<label for="lastN">Last Name</label>
-	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>	
+		<?php
+			$first = $_POST["firstN"];
+			$last = $_POST["lastN"];
+			$user = $_POST["UserN"];
+			$pass = $_POST["passW"];
 
-		<div class="field">
-	     		<label for="UserN">Username</label>
-	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	
+			include('CommonMethods.php');
+			$debug = false;
+			$Common = new CommonMethods($debug);
+			$sql = "INSERT INTO `Proj2Advisors`(`id`, `FirstName`, `LastName`, `Username`, `Password`) 
+			VALUES ('$first', '$last', '$user', '$pass')";
 
-		<div class="field">
-	     		<label for="PassW">Password</label>
-	      		<input id="PassW" size="20" maxlength="50" type="password" name="PassW" required>
-	   	</div>	
-
-		<div class="field">
-	     		<label for="ConfP">Confirm Password</label>
-	      		<input id="ConfP" size="20" maxlength="50" type="password" name="ConfP" required>
-	   	</div>	
-		<br>
-
-		<div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    	</div>
-
+			$rs = $Common->executeQuery($sql, "Advising Appointments");
+		?>
+		<form method="link" action="AdminUI.php">
+			<input type="submit" name="next" class="button large go" value="Return to Home">
+		</form>
 	</div>
 	</div>
 	</div>
