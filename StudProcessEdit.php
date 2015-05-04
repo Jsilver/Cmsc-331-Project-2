@@ -6,6 +6,18 @@ $_SESSION["lastN"] = strtoupper($_POST["lastN"]);
 $_SESSION["email"] = $_POST["email"];
 $_SESSION["major"] = $_POST["major"];
 
-header('Location: 02StudHome.php');
+$firstn = strtoupper($_POST["firstN"]);
+$lastn = strtoupper($_POST["lastN"]);
+$email = $_POST["email"];
+$major = $_POST["major"];
 
+$debug = false;
+include('../CommonMethods.php');
+$COMMON = new Common($debug);
+if($_SESSION["studExist"] == true){
+	$sql = "update `Proj2Students` set `FirstName` = '$firstn', `LastName` = '$lastn', `Email` = '$email', `Major` = '$major' where `AdvisorID` = '$advisor' and `Time` = '$apptime'";
+	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+}
+
+header('Location: 02StudHome.php');
 ?>

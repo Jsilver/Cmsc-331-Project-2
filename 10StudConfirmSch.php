@@ -230,30 +230,29 @@ $_SESSION["appTime"] = $_POST["appTime"];
 			include('../CommonMethods.php');
 			$COMMON = new Common($debug);
 			if(isset($_SESSION["resch"])){
-				echo "<h2>Previous Appointment</h2>";
-				
 				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				$row = mysql_fetch_row($rs);
-				$advisorID = $row[2];
-				$datephp = strtotime($row[1]);
+				$oldAdvisorID = $row[2];
+				$oldDatephp = strtotime($row[1]);
 				
-				if($advisorID != 0){
-					$sql2 = "select * from Proj2Advisors where `id` = '$advisorID'";
+				if($oldAdvisorID != 0){
+					$sql2 = "select * from Proj2Advisors where `id` = '$oldAdvisorID'";
 					$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-					$row2 = mysql_fetch_row($rs);
-					$advisorName = $row2[1] . " " . $row2[2];
+					$row2 = mysql_fetch_row($rs2);
+					$oldAdvisorName = $row2[1] . " " . $row2[2];
 				}
 				else{$advisorName = "Group";}
 				
+				echo "<h2>Previous Appointment</h2>";
 				echo "<label for='info'>";
-				echo "Advisor: ", $advisorName, "<br>";
-				echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
-				
+				echo "Advisor: ", $oldAdvisorName, "<br>";
+				echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
 			}
 			
 			$currentAdvisorName;
 			$currentAdvisorID = $_SESSION["advisor"];
+			$currentDatephp = strtotime($_SESSION["appTime"]);
 			if($currentAdvisorID != 0){
 				$sql2 = "select * from Proj2Advisors where `id` = '$currentAdvisorID'";
 				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
@@ -261,15 +260,22 @@ $_SESSION["appTime"] = $_POST["appTime"];
 				$currentAdvisorName = $row2[1] . " " . $row2[2];
 			}
 			else{$currentAdvisorName = "Group";}
+			
 			echo "<h2>Current Appointment</h2>";
-			$datephp = strtotime($_SESSION["appTime"]);
 			echo "<label for='newinfo'>";
 			echo "Advisor: ",$currentAdvisorName,"<br>";
-			echo "Appointment: ",date('l, F d, Y g:i A', $datephp),"</label>";
+			echo "Appointment: ",date('l, F d, Y g:i A', $currentDatephp),"</label>";
 		?>
         </div>
 	    <div class="nextButton">
-			<input type="submit" name="finish" class="button large go" value="Submit">
+		<?php
+			if(isset($_SESSION["resch"])){
+				echo "<input type='submit' name='finish' class='button large go' value='Reschedule'>";
+			}
+			else{
+				echo "<input type='submit' name='finish' class='button large go' value='Submit'>";
+			}
+		?>
 	    </div>
 		<div class="nextButton">
 			<input type="submit" name="finish" class="button large" value="Cancel">

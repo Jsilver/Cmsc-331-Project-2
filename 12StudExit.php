@@ -5,7 +5,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Student Advising Home</title>
+    <title>Exit Message</title>
     <style type="text/css">
       html{ 
       background-color: 
