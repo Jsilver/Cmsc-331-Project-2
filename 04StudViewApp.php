@@ -240,7 +240,7 @@ $studID = $_SESSION["studID"];
 			if($advisorID != 0){
 				$sql2 = "select * from Proj2Advisors where `id` = '$advisorID'";
 				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-				$row2 = mysql_fetch_row($rs);
+				$row2 = mysql_fetch_row($rs2);
 				$advisorName = $row2[1] . " " . $row2[2];
 			}
 			else{$advisorName = "Group";}

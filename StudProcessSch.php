@@ -34,7 +34,7 @@ if($_POST["finish"] == 'Submit'){
 else{
 	$_SESSION["status"] = "none";
 }
-header('Location: 02StudHome.php');
+header('Location: 12StudExit.php');
 //header('Location: 12StudExit.php');
 //if stud DNE set student? here? {}
 //if postFINISH = submit {

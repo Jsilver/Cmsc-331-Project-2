@@ -226,11 +226,11 @@ $_SESSION["appTime"] = $_POST["appTime"];
 	    <div class="field">
 		<form action = "StudProcessSch.php" method = "post" name = "SelectTime">
 	    <?php
+			$debug = false;
+			include('../CommonMethods.php');
+			$COMMON = new Common($debug);
 			if(isset($_SESSION["resch"])){
 				echo "<h2>Previous Appointment</h2>";
-				$debug = false;
-				include('../CommonMethods.php');
-				$COMMON = new Common($debug);
 				
 				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -257,7 +257,7 @@ $_SESSION["appTime"] = $_POST["appTime"];
 			if($currentAdvisorID != 0){
 				$sql2 = "select * from Proj2Advisors where `id` = '$currentAdvisorID'";
 				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
-				$row2 = mysql_fetch_row($rs);
+				$row2 = mysql_fetch_row($rs2);
 				$currentAdvisorName = $row2[1] . " " . $row2[2];
 			}
 			else{$currentAdvisorName = "Group";}
