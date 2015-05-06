@@ -226,7 +226,7 @@ session_start();
 	<?php
 		$debug = false;
 		include('../CommonMethods.php');
-		$COMMON = new CommonMethods($debug);
+		$COMMON = new Common($debug);
 
 		$User = $_SESSION["UserN"];
 		$Pass = $_SESSION["PassW"];
