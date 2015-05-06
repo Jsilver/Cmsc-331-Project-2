@@ -205,7 +205,7 @@ session_start();
       <div id="form">
         <div class="top">
 		<h1>Schedule Individual Appointments</h1>
-        <form action="AdminConfirmScheIndApp.html" method="post" name="Confirm">
+        <form action="AdminConfirmScheIndApp.php" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
 	      <input id="Date" type="date" name="Date" required autofocus>
@@ -233,11 +233,11 @@ session_start();
 
         <div class="field">
             <label for="Repeat">Repeat Weekly</label>
-            <input type="checkbox" name="Repeat" value="Monday">Monday
-            <input type="checkbox" name="Repeat" value="Tuesday">Tuesday
-            <input type="checkbox" name="Repeat" value="Wednesday">Wednesday
-            <input type="checkbox" name="Repeat" value="Thursday">Thursday
-            <input type="checkbox" name="Repeat" value="Friday">Friday
+            <input type="checkbox" name="Repeat1" value="Monday">Monday
+            <input type="checkbox" name="Repeat2" value="Tuesday">Tuesday
+            <input type="checkbox" name="Repeat3" value="Wednesday">Wednesday
+            <input type="checkbox" name="Repeat4" value="Thursday">Thursday
+            <input type="checkbox" name="Repeat5" value="Friday">Friday
         </div>
 
         <div class="field">
@@ -246,7 +246,7 @@ session_start();
 		weeks</h3>
         </div>
 	    <div class="nextButton">
-			<input type="submit" name="next" onClick="saveValue('stepper')" class="button large go" value="Next">
+			<input type="submit" name="next" class="button large go" value="Next">
 	</div>
 	</div>
 	</form>

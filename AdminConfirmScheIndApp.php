@@ -204,8 +204,85 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
+		<h2>Confirm Appointment Creation</h2><br>
+		<?php
+			include('../CommonMethods.php');
+			$debug = false;
+			$Common = new Common($debug);
+			$date = $_POST["Date"];
+			$time = $_POST["Time"];
+			$repeat1 = $_POST["Repeat1"];
+			$repeat2 = $_POST["Repeat2"];
+			$repeat3 = $_POST["Repeat3"];
+			$repeat4 = $_POST["Repeat4"];
+			$repeat5 = $_POST["Repeat5"];
+			$weeks = $_POST["stepper"];
+			
+			for($i = 0; $i < $weeks; $i++){
+				if($repeat1){
+					$sql = "SELECT * FROM `Proj2Appointments` WHERE `Time` = '$date . ' ' . $time'";
+					$rs = $Common->executeQuery($sql, "Advising Appointments");
+					$row = mysql_fetch_row($rs);
+					if($row){
+						echo("<h3>Appointment already exists!</h3><br>");
+						echo("<h4>Time: $date . \" \" . $time</h4><br>");
+					}
+					else{
+						echo("<h4>Time: $date . \" \" . $time</h4><br>");
+					}
+				}
+				if($repeat2){
+					$sql = "SELECT * FROM `Proj2Appointments` WHERE `Time` = '$date . ' ' . $time'";
+          $rs = $Common->executeQuery($sql, "Advising Appointments");
+          $row = mysql_fetch_row($rs);
+          if($row){
+            echo("<h3>Appointment already exists!</h3><br>");
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+          else{
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+				}
+				if($repeat3){
+					$sql = "SELECT * FROM `Proj2Appointments` WHERE `Time` = '$date . ' ' . $time'";
+          $rs = $Common->executeQuery($sql, "Advising Appointments");
+          $row = mysql_fetch_row($rs);
+          if($row){
+            echo("<h3>Appointment already exists!</h3><br>");
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+          else{
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+				}
+				if($repeat4){
+					$sql = "SELECT * FROM `Proj2Appointments` WHERE `Time` = '$date . ' ' . $time'";
+          $rs = $Common->executeQuery($sql, "Advising Appointments");
+          $row = mysql_fetch_row($rs);
+          if($row){
+            echo("<h3>Appointment already exists!</h3><br>");
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+          else{
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+				}
+				if($repeat5){
+					$sql = "SELECT * FROM `Proj2Appointments` WHERE `Time` = '$date . ' ' . $time'";
+          $rs = $Common->executeQuery($sql, "Advising Appointments");
+          $row = mysql_fetch_row($rs);
+          if($row){
+            echo("<h3>Appointment already exists!</h3><br>");
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+          else{
+            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+          }
+				}
+			}
+		?>
 		<form method="link" action="AdminUI.php">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
+			<input type="submit" name="next" class="button large go" value="Cancel">
 		</form>
 	</div>
 	</div>
