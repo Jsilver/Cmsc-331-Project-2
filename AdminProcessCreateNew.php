@@ -210,12 +210,12 @@ session_start();
 			$first = $_POST["firstN"];
 			$last = $_POST["lastN"];
 			$user = $_POST["UserN"];
-			$pass = $_POST["passW"];
+			$pass = $_POST["PassW"];
 
-			include('CommonMethods.php');
+			include('../CommonMethods.php');
 			$debug = false;
-			$Common = new CommonMethods($debug);
-			$sql = "INSERT INTO `Proj2Advisors`(`id`, `FirstName`, `LastName`, `Username`, `Password`) 
+			$Common = new Common($debug);
+			$sql = "INSERT INTO `Proj2Advisors`(`FirstName`, `LastName`, `Username`, `Password`) 
 			VALUES ('$first', '$last', '$user', '$pass')";
 
 			$rs = $Common->executeQuery($sql, "Advising Appointments");

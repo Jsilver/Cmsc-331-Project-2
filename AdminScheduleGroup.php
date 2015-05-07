@@ -212,24 +212,52 @@ session_start();
 	    </div>
 
 	    <div class="field">
-	      <label for="Time">Time</label>
-	      <select id="Time" name="Time">
-		<option>9:00AM-9:30AM</option>
-		<option>9:30AM-10:00AM</option>
-		<option>10:00AM-10:30AM</option>
-		<option>10:30AM-11:00AM</option>
-		<option>11:00AM-11:30AM</option>
-		<option>11:30AM-12:00PM</option>
-		<option>12:00PM-12:30PM</option>
-		<option>12:30PM-1:00PM</option>
-		<option>1:00PM-1:30PM</option>
-		<option>1:30PM-2:00PM</option>
-		<option>2:00PM-2:30PM</option>
-		<option>2:30PM-3:00PM</option>
-		<option>3:00PM-3:30PM</option>
-		<option>3:30PM-4:00PM</option>
-		</select>
-	    </div>
+        <label for="Time">Times</label>
+        <input type="checkbox" name="8am" value="08:00:00">8:00AM-8:30AM
+        <input type="checkbox" name="830am" value="08:30:00">8:30AM-9:00AM<br >
+        <input type="checkbox" name="9am" value="09:00:00">9:00AM-9:30AM
+        <input type="checkbox" name="930am" value="09:30:00">9:30AM-10:00AM<br >
+        <input type="checkbox" name="10am" value="10:00:00">10:00AM-10:30AM
+        <input type="checkbox" name="1030am" value="10:30:00">10:30AM-11:00AM<br >
+        <input type="checkbox" name="11am" value="11:00:00">11:00AM-11:30AM
+        <input type="checkbox" name="1130am" value="11:30:00">11:30AM-12:00PM<br >
+        <input type="checkbox" name="12pm" value="12:00:00">12:00PM-12:30PM
+        <input type="checkbox" name="1230pm" value="12:30:00">12:30PM-1:00PM<br >
+        <input type="checkbox" name="1pm" value="13:00:00">1:00PM-1:30PM
+        <input type="checkbox" name="130pm" value="13:30:00">1:30PM-2:00PM<br >
+        <input type="checkbox" name="2pm" value="14:00:00">2:00PM-2:30PM
+        <input type="checkbox" name="230pm" value="14:30:00">2:30PM-3:00PM<br >
+        <input type="checkbox" name="3pm" value="15:00:00">3:00PM-3:30PM
+        <input type="checkbox" name="330pm" value="15:30:00">3:30PM-4:00PM<br >
+        <input type="checkbox" name="4pm" value="16:00:00">4:00PM-4:30PM
+       
+      </div>
+
+      <div class="field">
+        <label for="Majors">Majors</label>
+        <table border="0" cellpadding="3" cellspacing="0">
+          <tr>
+              <td>
+                  <select name="Features" size="4" MULTIPLE>
+                      <option value="CMPE">Computer Engineering</option>
+                      <option value="CMSC">Computer Science</option>
+                      <option value="MECH">Mechanical Engineering</option>
+                      <option value="CHEN">Chemical Engineering</option>
+                  </select>
+              </td>
+              <td align="center" valign="middle">
+                  <input type="Button" value="Add >>" style="width:100px" onClick="SelectMoveRows(document.Confirm.Features,document.Confirm.FeatureCodes)">
+                  <br><br>
+                  <input type="Button" value="<< Remove" style="width:100px" onClick="SelectMoveRows(document.Confirm.FeatureCodes,document.Confirm.Features)">
+              </td>
+              <td>
+                  <select name="FeatureCodes" size="4" MULTIPLE>
+                  </select>
+              </td>
+          </tr>
+        </table>
+       
+      </div>
 
         <div class="field">
             <label for="Repeat">Repeat Weekly</label>
@@ -252,7 +280,7 @@ session_start();
         </div>
 
 	<div class="nextButton">
-		<input type="submit" name="next" class="button large go" value="Next">
+		<input type="submit" name="next" class="button large go" value="Create">
 	</div>
 	</div>
 	</form>

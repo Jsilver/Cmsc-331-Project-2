@@ -193,6 +193,22 @@ session_start();
         .button-item { margin: 8px 8px 12px; }
       }
     </style>
+
+    <script type="text/javascript">
+      window.onload = function () {
+          document.getElementById("PassW").onchange = validatePassword;
+          document.getElementById("ConfP").onchange = validatePassword;
+      }
+      function validatePassword(){
+        var pass2=document.getElementById("ConfP").value;
+        var pass1=document.getElementById("PassW").value;
+        if(pass1!=pass2)
+            document.getElementById("ConfP").setCustomValidity("Passwords Don't Match:" pass1, pass2);
+        else
+            document.getElementById("PassW").setCustomValidity('');  
+        //empty string means no validation error
+      }
+    </script>
   </head>
    <body>
     <div id="login">
@@ -200,7 +216,7 @@ session_start();
         <div class="top">
 		<h2>Creating new Adivsor Account</h2>
 		
-		<form action="AdminProcessMakeNew.php" method="post" name="Create">
+		<form action="AdminProcessCreateNew.php" method="post" name="Create">
 		<div class="field">
 	      		<label for="firstN">First Name</label>
 	      		<input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
@@ -214,7 +230,7 @@ session_start();
 		<div class="field">
 	     		<label for="UserN">Username</label>
 	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	
+	   	</div>	 
 
 		<div class="field">
 	     		<label for="PassW">Password</label>

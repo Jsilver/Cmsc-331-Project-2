@@ -204,7 +204,7 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Schedule Individual Appointments</h1>
+		    <h1>Schedule Individual Appointments</h1>
         <form action="AdminConfirmScheIndApp.php" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
@@ -212,24 +212,34 @@ session_start();
 	    </div>
 
 	    <div class="field">
-	      <label for="Time">Time</label>
-	      <select id="Time" name="Time">
-		<option>9:00AM-9:30AM</option>
-		<option>9:30AM-10:00AM</option>
-		<option>10:00AM-10:30AM</option>
-		<option>10:30AM-11:00AM</option>
-		<option>11:00AM-11:30AM</option>
-		<option>11:30AM-12:00PM</option>
-		<option>12:00PM-12:30PM</option>
-		<option>12:30PM-1:00PM</option>
-		<option>1:00PM-1:30PM</option>
-		<option>1:30PM-2:00PM</option>
-		<option>2:00PM-2:30PM</option>
-		<option>2:30PM-3:00PM</option>
-		<option>3:00PM-3:30PM</option>
-		<option>3:30PM-4:00PM</option>
-		</select>
+	      <label for="Time">Times</label>
+        <input type="checkbox" name="8am" value="08:00:00">8:00AM-8:30AM
+        <input type="checkbox" name="830am" value="08:30:00">8:30AM-9:00AM<br >
+        <input type="checkbox" name="9am" value="09:00:00">9:00AM-9:30AM
+        <input type="checkbox" name="930am" value="09:30:00">9:30AM-10:00AM<br >
+        <input type="checkbox" name="10am" value="10:00:00">10:00AM-10:30AM
+        <input type="checkbox" name="1030am" value="10:30:00">10:30AM-11:00AM<br >
+        <input type="checkbox" name="11am" value="11:00:00">11:00AM-11:30AM
+        <input type="checkbox" name="1130am" value="11:30:00">11:30AM-12:00PM<br >
+        <input type="checkbox" name="12pm" value="12:00:00">12:00PM-12:30PM
+        <input type="checkbox" name="1230pm" value="12:30:00">12:30PM-1:00PM<br >
+        <input type="checkbox" name="1pm" value="13:00:00">1:00PM-1:30PM
+        <input type="checkbox" name="130pm" value="13:30:00">1:30PM-2:00PM<br >
+        <input type="checkbox" name="2pm" value="14:00:00">2:00PM-2:30PM
+        <input type="checkbox" name="230pm" value="14:30:00">2:30PM-3:00PM<br >
+        <input type="checkbox" name="3pm" value="15:00:00">3:00PM-3:30PM
+        <input type="checkbox" name="330pm" value="15:30:00">3:30PM-4:00PM<br >
+        <input type="checkbox" name="4pm" value="16:00:00">4:00PM-4:30PM
+	     
 	    </div>
+
+      <div class="field">
+        <label for="Majors">Majors</label>
+          <input type="checkbox" name="CMPE" value="CMPE">Computer Engineering
+          <input type="checkbox" name="CMSC" value="CMSC">Computer Science
+          <input type="checkbox" name="MECH" value="MECH">Mechanical Engineering
+          <input type="checkbox" name="CHEN" value="CHEN">Chemical Engineering
+      </div>
 
         <div class="field">
             <label for="Repeat">Repeat Weekly</label>
@@ -242,11 +252,11 @@ session_start();
 
         <div class="field">
         	<h3>Repeat for
-        	<input type="number" id="stepper" name="stepper" min="0" max="4" value="0" />
-		weeks</h3>
+        	<input type="number" id="stepper" name="stepper" min="1" max="4" value="1" />
+		      weeks</h3>
         </div>
 	    <div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
+			<input type="submit" name="next" class="button large go" value="Create">
 	</div>
 	</div>
 	</form>
