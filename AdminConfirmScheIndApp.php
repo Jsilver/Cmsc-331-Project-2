@@ -204,7 +204,7 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Confirm Appointment Creation</h2><br>
+		<h2>Appointments Created</h2><br>
 		<?php
 			include('../CommonMethods.php');
 			$debug = false;
