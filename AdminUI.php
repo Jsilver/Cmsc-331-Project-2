@@ -236,10 +236,12 @@ session_start();
 
 		$rs = $COMMON->executeQuery($sql, "Advising Appointments");
 		$row = mysql_fetch_row($rs);
-		foreach($row as $element){
-			$firstN = $element;
-		}
-		echo $firstN;
+    if($row){
+  		foreach($row as $element){
+  			$firstN = $element;
+  		}
+  		echo $firstN;
+    } 
 	?>
 	</h2>
 	

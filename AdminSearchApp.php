@@ -208,7 +208,7 @@ session_start();
         <form action="AdminSearchResults.php" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" required autofocus>  (mm/dd/yyyy)
+	      <input id="Date" type="date" name="Date" autofocus>(mm/dd/yyyy)
 	    </div>
 
 	    <div class="field">
@@ -234,11 +234,17 @@ session_start();
 	    <div class="field">
 	      <label for="Advisor">Advisor</label>
 	      <select id="Advisor" name="Advisor">
-		<option></option>
-		<option>Josh Abrams</option>
-		<option>Anne Arey</option>
-		<option>Emily Stephens</option>
-		</select>
+        <?php
+          include('../CommonMethods.php');
+          $debug = false;
+          $Common = new Common($debug);
+          $sql = "select `FirstName`, `LastName` from Proj2Advisors";
+          $rs = $Common->executeQuery($sql, "Advising Appointments");
+          while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
+            echo("<option>$row[0] $row[1]</option>"); 
+          }
+        ?>
+		    </select>
 	    </div>
 
 	<div class="nextButton">
