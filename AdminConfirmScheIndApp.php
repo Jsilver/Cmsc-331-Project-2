@@ -225,10 +225,10 @@ session_start();
 					$row = mysql_fetch_row($rs);
 					if($row){
 						echo("<h3>Appointment already exists!</h3><br>");
-						echo("<h4>Time: $date . \" \" . $time</h4><br>");
+						echo("<h4>Time: $date $time</h4><br>");
 					}
 					else{
-						echo("<h4>Time: $date . \" \" . $time</h4><br>");
+						echo("<h4>Time: $date $time</h4><br>");
 					}
 				}
 				if($repeat2){
@@ -237,10 +237,10 @@ session_start();
           $row = mysql_fetch_row($rs);
           if($row){
             echo("<h3>Appointment already exists!</h3><br>");
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
           else{
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
 				}
 				if($repeat3){
@@ -249,10 +249,10 @@ session_start();
           $row = mysql_fetch_row($rs);
           if($row){
             echo("<h3>Appointment already exists!</h3><br>");
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
           else{
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
 				}
 				if($repeat4){
@@ -261,10 +261,10 @@ session_start();
           $row = mysql_fetch_row($rs);
           if($row){
             echo("<h3>Appointment already exists!</h3><br>");
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
           else{
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
 				}
 				if($repeat5){
@@ -273,10 +273,10 @@ session_start();
           $row = mysql_fetch_row($rs);
           if($row){
             echo("<h3>Appointment already exists!</h3><br>");
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
           else{
-            echo("<h4>Time: $date . \" \" . $time</h4><br>");
+            echo("<h4>Time: $date $time</h4><br>");
           }
 				}
 			}
