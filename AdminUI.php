@@ -256,7 +256,7 @@ session_start();
 	</form>
 	<br>
 
-	<form method="link" action="StudentAdminSignIn.html">
+	<form method="link" action="Logout.php">
 		<input type="submit" name="next" class="button large go" value="Log Out">
 	</form>
           
