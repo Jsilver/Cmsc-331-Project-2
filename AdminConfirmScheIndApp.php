@@ -230,7 +230,7 @@ $COMMON = new Common($debug);
 							date('l', strtotime($d3)) => strtotime($d3),
 							date('l', strtotime($d4)) => strtotime($d4),
 							date('l', strtotime($d5)) => strtotime($d5),
-							date('l', strtotime($d6)) => strtotime($d6));
+							date('l', strtotime($d6)) => strtotime($d6)); 
 			
 			//initialize the first wk
 			$dates = array();
@@ -295,7 +295,7 @@ $COMMON = new Common($debug);
 					$sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`) values ('$dt', '$id', '$majorDB',1)";
 					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				}
-				echo "<br>";
+				echo "<br><br>";
 			}
 		?>
 		<br>

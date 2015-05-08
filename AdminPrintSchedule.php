@@ -213,7 +213,7 @@ session_start();
 
 	    <div class="field">
 		<label for="Type">Type of Appointment</label>
-              	<select id="type" name = "type">
+    <select id="type" name = "type">
 			<option>Individual</option>
 			<option>Group</option>
 			<option>Both</option>

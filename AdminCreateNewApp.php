@@ -203,7 +203,7 @@ session_start();
         var pass2=document.getElementById("ConfP").value;
         var pass1=document.getElementById("PassW").value;
         if(pass1!=pass2)
-            document.getElementById("ConfP").setCustomValidity("Passwords Don't Match:" pass1, pass2);
+            document.getElementById("ConfP").setCustomValidity("Passwords Don't Match");
         else
             document.getElementById("PassW").setCustomValidity('');  
         //empty string means no validation error
