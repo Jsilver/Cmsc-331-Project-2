@@ -42,7 +42,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 650px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -75,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], textarea {
+      input[type="text"], input[type="date"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -169,6 +169,7 @@ session_start();
       .top{ 
       border-bottom: 1px solid #eee; 
       padding-bottom: 12px; 
+	  font-size: 14px;
       }
 
       .actions{ 
@@ -184,7 +185,7 @@ session_start();
 
       p{ 
       margin: 0; 
-      padding: 0; 
+      padding: 0;
       }
 
       .login-create{ 
@@ -235,10 +236,10 @@ session_start();
 
       <div class="field">
         <label for="Majors">Majors</label>
-          <input type="checkbox" name="major[]" value="CMPE">Computer Engineering
-          <input type="checkbox" name="major[]" value="CMSC">Computer Science
-          <input type="checkbox" name="major[]" value="MECH">Mechanical Engineering
-          <input type="checkbox" name="major[]" value="CHEN">Chemical Engineering
+          <input type="checkbox" name="major[]" value="Computer Engineering">Computer Engineering
+          <input type="checkbox" name="major[]" value="Computer Science">Computer Science
+          <input type="checkbox" name="major[]" value="Mechanical Engineering">Mechanical Engineering
+          <input type="checkbox" name="major[]" value="Chemical Engineering">Chemical Engineering
       </div>
 
         <div class="field">
@@ -253,7 +254,7 @@ session_start();
         <div class="field">
         	<h3>Repeat for
         	<input type="number" id="stepper" name="stepper" min="0" max="4" value="0" />
-		      weeks</h3>
+		      more week(s)</h3>
         </div>
 	    <div class="nextButton">
 			<input type="submit" name="next" class="button large go" value="Create">

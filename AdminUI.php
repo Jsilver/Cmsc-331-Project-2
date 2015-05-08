@@ -1,5 +1,8 @@
 <?php
 session_start();
+$debug = false;
+include('../CommonMethods.php');
+$COMMON = new Common($debug);
 ?>
 
 <!DOCTYPE html>
@@ -224,9 +227,7 @@ session_start();
         <div class="top">
 	<h2> Hello 
 	<?php
-		$debug = false;
-		include('../CommonMethods.php');
-		$COMMON = new Common($debug);
+		
 
 		$User = $_SESSION["UserN"];
 		$Pass = $_SESSION["PassW"];
@@ -234,14 +235,9 @@ session_start();
 			WHERE `Username` = '$User' 
 			and `Password` = '$Pass'";
 
-		$rs = $COMMON->executeQuery($sql, "Advising Appointments");
+		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		$row = mysql_fetch_row($rs);
-    if($row){
-  		foreach($row as $element){
-  			$firstN = $element;
-  		}
-  		echo $firstN;
-    } 
+		echo $row[0];
 	?>
 	</h2>
 	
