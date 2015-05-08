@@ -102,6 +102,7 @@ session_start();
         overflow: visible;
         padding: 0 12px;
         margin: 5px auto 0;
+		margin-top: 30px;
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -223,6 +224,7 @@ session_start();
         <div class="top">
 	    <div class="statusMessage">
 	    <?php
+			$_SESSION["resch"] = false;			
 			if($_SESSION["status"] == "complete"){
 				echo "You have completed your sign-up for an advising appointment.";
 			}

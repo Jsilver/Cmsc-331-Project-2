@@ -229,8 +229,15 @@ $_SESSION["appTime"] = $_POST["appTime"];
 			$debug = false;
 			include('../CommonMethods.php');
 			$COMMON = new Common($debug);
-			if(isset($_SESSION["resch"])){
-				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
+			
+			$firstn = $_SESSION["firstN"];
+			$lastn = $_SESSION["lastN"];
+			$studid = $_SESSION["studID"];
+			$major = $_SESSION["major"];
+			$email = $_SESSION["email"];
+			
+			if($_SESSION["resch"] == true){
+				$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				$row = mysql_fetch_row($rs);
 				$oldAdvisorID = $row[2];
@@ -242,7 +249,7 @@ $_SESSION["appTime"] = $_POST["appTime"];
 					$row2 = mysql_fetch_row($rs2);
 					$oldAdvisorName = $row2[1] . " " . $row2[2];
 				}
-				else{$advisorName = "Group";}
+				else{$oldAdvisorName = "Group";}
 				
 				echo "<h2>Previous Appointment</h2>";
 				echo "<label for='info'>";
@@ -269,7 +276,7 @@ $_SESSION["appTime"] = $_POST["appTime"];
         </div>
 	    <div class="nextButton">
 		<?php
-			if(isset($_SESSION["resch"])){
+			if($_SESSION["resch"] == true){
 				echo "<input type='submit' name='finish' class='button large go' value='Reschedule'>";
 			}
 			else{

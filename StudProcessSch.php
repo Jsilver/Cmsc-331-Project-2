@@ -20,6 +20,7 @@ else{
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 	}
 	
+	//regular new schedule
 	if($_POST["finish"] == 'Submit'){
 		if($_SESSION["advisor"] == 'Group'){
 			$sql = "select * from Proj2Appointments where `Time` = '$apptime' and `AdvisorID` = 0";
@@ -33,19 +34,22 @@ else{
 			$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum+1, `EnrolledID` = '$studid' where `AdvisorID` = '$advisor' and `Time` = '$apptime'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		}
+		
+		//update stud status to ''
+		$sql = "update `Proj2Students` set `Status` = '' where `StudentID` = '$studid'";
+		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+		
 		$_SESSION["status"] = "complete";
 	}
 	elseif($_POST["finish"] == 'Reschedule'){
 		//remove stud from EnrolledID
-		$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studID%'";
+		$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		$row = mysql_fetch_row($rs);
 		$oldAdvisorID = $row[2];
 		$oldAppTime = $row[1];
-		if($oldAdvisorID == 0){
-			$newIDs = str_replace(" ".$studid, "", $row[4]);
-		}
-		else{$newIDs = str_replace($studid, "", $row[4]);}
+		$newIDs = str_replace($studid, "", $row[4]);
+		
 		$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum-1, `EnrolledID` = '$newIDs' where `AdvisorID` = '$oldAdvisorID' and `Time` = '$oldAppTime'";
 		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		
@@ -62,6 +66,11 @@ else{
 			$sql = "update `Proj2Appointments` set `EnrolledNum` = EnrolledNum+1, `EnrolledID` = '$studid' where `Time` = '$apptime' and `AdvisorID` = '$advisor'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 		}
+		
+		//update stud status to ''
+		$sql = "update `Proj2Students` set `Status` = '' where `StudentID` = '$studid'";
+		$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+		
 		$_SESSION["status"] = "resch";
 	}
 }

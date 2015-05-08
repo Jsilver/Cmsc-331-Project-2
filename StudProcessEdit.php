@@ -8,6 +8,7 @@ $_SESSION["major"] = $_POST["major"];
 
 $firstn = strtoupper($_POST["firstN"]);
 $lastn = strtoupper($_POST["lastN"]);
+$studid = $_SESSION["studID"];
 $email = $_POST["email"];
 $major = $_POST["major"];
 
@@ -15,7 +16,7 @@ $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
 if($_SESSION["studExist"] == true){
-	$sql = "update `Proj2Students` set `FirstName` = '$firstn', `LastName` = '$lastn', `Email` = '$email', `Major` = '$major' where `AdvisorID` = '$advisor' and `Time` = '$apptime'";
+	$sql = "update `Proj2Students` set `FirstName` = '$firstn', `LastName` = '$lastn', `Email` = '$email', `Major` = '$major' where `StudentID` = '$studid'";
 	$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 }
 

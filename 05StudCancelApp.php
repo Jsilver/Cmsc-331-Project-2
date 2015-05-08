@@ -228,21 +228,30 @@ $COMMON = new Common($debug);
 		<h1>Cancel Appointment</h1>
 	    <div class="field">
 	    <?php
-			$sql = "select * from Proj1Students";
+			$firstn = $_SESSION["firstN"];
+			$lastn = $_SESSION["lastN"];
+			$studid = $_SESSION["studID"];
+			$major = $_SESSION["major"];
+			$email = $_SESSION["email"];
+			
+			$sql = "select * from Proj2Appointments where `EnrolledID` like '%$studid%'";
 			$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
-			 
-			while($row = mysql_fetch_row($rs)){
-				if($row[3] == $_SESSION["studID"]){
-					$datephp = strtotime($row[6]);
-					echo "<label for='info'>";
-					echo "Advisor: ", $row[5], "<br>";
-					echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
-				}
-				$datephp = strtotime($row[6]);
-					echo "<label for='info'>";
-					echo "Advisor: ", $row[5], "<br>";
-					echo "Appointment: ", date('l, F d, Y g:i A', $datephp), "</label>";
+			$row = mysql_fetch_row($rs);
+			$oldAdvisorID = $row[2];
+			$oldDatephp = strtotime($row[1]);				
+				
+			if($oldAdvisorID != 0){
+				$sql2 = "select * from Proj2Advisors where `id` = '$oldAdvisorID'";
+				$rs2 = $COMMON->executeQuery($sql2, $_SERVER["SCRIPT_NAME"]);
+				$row2 = mysql_fetch_row($rs2);					
+				$oldAdvisorName = $row2[1] . " " . $row2[2];
 			}
+			else{$oldAdvisorName = "Group";}
+			
+			echo "<h2>Current Appointment</h2>";
+			echo "<label for='info'>";
+			echo "Advisor: ", $oldAdvisorName, "<br>";
+			echo "Appointment: ", date('l, F d, Y g:i A', $oldDatephp), "</label><br>";
 		?>		
         </div>
 	    <div class="finishButton">
@@ -250,8 +259,10 @@ $COMMON = new Common($debug);
 			<input type="submit" name="cancel" class="button large go" value="Cancel">
 			<input type="submit" name="cancel" class="button large" value="Keep">
 			</form>
-			<p>Click "Cancel" to cancel appointment. Click "Keep" to keep appointment.</p>
 	    </div>
+		</div>
+		<div class="bottom">
+			<p>Click "Cancel" to cancel appointment. Click "Keep" to keep appointment.</p>
 		</div>
 		</form>
   </body>
