@@ -219,7 +219,7 @@ session_start();
         <input type="checkbox" name="time[]" value="09:00:00"> 9:00AM - 9:30AM <br>
         <input type="checkbox" name="time[]" value="09:30:00"> 9:30AM - 10:00AM <br>
         <input type="checkbox" name="time[]" value="10:00:00"> 10:00AM - 10:30AM <br>
-        <input type="checkbox" name="time[]" value="10:30:00"> 10:30AM - 11:00AM <br>
+        <input type="checkbox" name="time[]" value="10:30:00"> 10:30AM - 11:00AM <br> 
         <input type="checkbox" name="time[]" value="11:00:00"> 11:00AM - 11:30AM <br>
         <input type="checkbox" name="time[]" value="11:30:00"> 11:30AM - 12:00PM <br>
         <input type="checkbox" name="time[]" value="12:00:00"> 12:00PM - 12:30PM <br>

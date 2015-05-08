@@ -210,51 +210,98 @@ session_start();
 			
 			$debug = false;
 			include('../CommonMethods.php');
-			$COMMON = new CommonMethods($debug);
+			$COMMON = new Common($debug);
+      $User = $_SESSION["UserN"];
 
-      $sql = "SELECT `id` from `Proj2Advisors` WHERE `FirstName` = $FirstName AND `LastName` = $LastName";
-      $rs = $Common->executeQuery($sql, "Advising Appointments");
+      $sql = "SELECT `id` from `Proj2Advisors` WHERE `Username` = '$User'";
+      $rs = $COMMON->executeQuery($sql, "Advising Appointments");
       $row = mysql_fetch_row($rs);
-      $id = $row;
+      $id = $row[0];
+
+      $sql = "SELECT `firstName`, `lastName` FROM `Proj2Advisors` WHERE `Username` = '$User'";
+      $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+      $row = mysql_fetch_row($rs);
+      $FirstName = $row[0];
+      $LastName = $row[1];
 		
-			echo("<h2>Schedule for $date</h2><br>");
+			echo("<h2>Schedule for $date</h2>");
 			if($_POST["type"] == 'Both'){
-				echo("<h3>Group Appointments</h3><br>");
+				echo("<h3>Group Appointments</h3>");
 				$sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
 				WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-        while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-          echo("<option>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] Number of seats: $row[3]</option>"); 
+        $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+        $row = mysql_fetch_array($rs, MYSQL_NUM);
+        if($row){
+          echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          echo("<br><br>");
+          while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
+            echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("<br><br>");
+          }
         }
-				echo("<h3>Individual Appointments for $FirstName $LastName</h3><br>");
-        $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
+        else{
+          echo("<b>No results found</b>");
+          echo("<br><br>");
+        }
+
+				echo("<h3>Individual Appointments for $FirstName $LastName</h3>");
+        $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-        while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-          echo("<option>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] Number of seats: $row[3]</option>"); 
+        $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+        $row = mysql_fetch_array($rs, MYSQL_NUM);
+        if($row){
+          echo("<b>Time: $row[0] Majors Included: $row[1]</b>"); 
+          echo("<br><br>");
+          while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
+            echo("<b>Time: $row[0] Majors Included: $row[1]</b>"); 
+            echo("<br><br>");
+          }
+        }
+        else{
+          echo("<b>No results found</b>");
+          echo("<br><br>");
         }
 			}
+
 			elseif($_POST["type" == 'Individual']){
-				echo("<h3>Individual Appointments</h3><br>");
-        $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
+				echo("<h3>Individual Appointments</h3>");
+        $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-        while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-          echo("<option>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] Number of seats: $row[3]</option>"); 
+        $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+        $row = mysql_fetch_array($rs, MYSQL_NUM);
+        if($row){
+          echo("<b>Time: $row[0] Majors Included: $row[1]</b>"); 
+          echo("<br><br>");
+          while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
+            echo("<b>Time: $row[0] Majors Included: $row[1]</b>"); 
+            echo("<br><br>");
+          }
+        }
+        else{
+          echo("<b>No results found</b>");
+          echo("<br><br>");
         }
 			}
+
 			elseif($_POST["type" == 'Group']){
 				echo("<h3>Group Appointments</h3><br>");
         $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
-        $rs = $Common->executeQuery($sql, "Advising Appointments");
-        while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-          echo("<option>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] Number of seats: $row[3]</option>"); 
+        $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+        $row = mysql_fetch_array($rs, MYSQL_NUM);
+        if($row){
+          echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          echo("<br><br>");
+          while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
+            echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("<br><br>");
+          }
+        }
+        else{
+          echo("<b>No results found</b>");
+          echo("<br><br>");
         }
 			}
-	
-			echo ($date);
-			echo ($type);
 		?>
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">

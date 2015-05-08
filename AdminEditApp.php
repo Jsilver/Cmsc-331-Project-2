@@ -17,7 +17,7 @@ session_start();
       }
 
       body{ 
-      margin: 0; 
+      margin: 0;  
       padding: 0; 
       }
 
