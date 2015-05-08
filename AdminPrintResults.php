@@ -226,16 +226,28 @@ session_start();
 		
 			echo("<h2>Schedule for $date</h2>");
 			if($_POST["type"] == 'Both'){
-				echo("<h3>Group Appointments</h3>");
+				echo("<h3>Group Appointments:</h3>");
 				$sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
 				WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          echo("<b>Time: $row[0] Majors Included: ");
+          if($row[1]){
+            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          }
+          else{
+            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("<b>Time: $row[0] Majors Included: ");
+            if($row[1]){
+              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            }
+            else{
+              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            }
             echo("<br><br>");
           }
         }
@@ -244,7 +256,7 @@ session_start();
           echo("<br><br>");
         }
 
-				echo("<h3>Individual Appointments for $FirstName $LastName</h3>");
+				echo("<h3>Individual Appointments for $FirstName $LastName:</h3>");
         $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
@@ -263,8 +275,8 @@ session_start();
         }
 			}
 
-			elseif($_POST["type" == 'Individual']){
-				echo("<h3>Individual Appointments</h3>");
+			elseif($_POST["type"] == 'Individual'){
+        echo("<h3>Individual Appointments for $FirstName $LastName:</h3>");
         $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
@@ -283,17 +295,29 @@ session_start();
         }
 			}
 
-			elseif($_POST["type" == 'Group']){
-				echo("<h3>Group Appointments</h3><br>");
+			elseif($_POST["type"] == 'Group'){
+				echo("<h3>Group Appointments:</h3>");
         $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          echo("<b>Time: $row[0] Majors Included: ");
+          if($row[1]){
+            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          }
+          else{
+            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+          }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("<b>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("<b>Time: $row[0] Majors Included: ");
+            if($row[1]){
+              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            }
+            else{
+              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            }
             echo("<br><br>");
           }
         }
