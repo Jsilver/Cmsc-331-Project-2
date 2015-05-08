@@ -226,7 +226,7 @@ session_start();
         while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
           echo("<option>Time: $row[0] Majors Included: $row[1] <br> Number of students enrolled: $row[2] Number of seats: $row[3]</option>"); 
         }
-				echo("<h3>Individual Appointments for $FirstName $LastName"</h3><br>);
+				echo("<h3>Individual Appointments for $FirstName $LastName</h3><br>");
         $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
         WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
         $rs = $Common->executeQuery($sql, "Advising Appointments");

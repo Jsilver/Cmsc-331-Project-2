@@ -287,7 +287,7 @@ $COMMON = new Common($debug);
 				$sql = "select * from `Proj2Appointments` where `Time` = '$dt'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				$row = mysql_fetch_row($rs);
-				echo date('l, F d, Y g:i A', strtotime($dt)), " <i> Major: </i>", $majorPrint;
+				echo date('l, F d, Y g:i A', strtotime($dt)), " <i> Majors included: </i>", $majorPrint;
 				if($row){
 					echo "<span style='color:red'>!!</span>";
 				}

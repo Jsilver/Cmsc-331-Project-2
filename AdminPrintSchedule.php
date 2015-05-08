@@ -204,29 +204,28 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Print Schedule</h1>
-        <form action="AdminPrintResults.php" method="post" name="Confirm">
-	    <div class="field">
-	     	<label for="Date">Date</label>
-	   	<input id="Date" type="date" name="Date" required autofocus>
-	    </div>
+		      <h1>Print Schedule</h1>
+          <form action="AdminPrintResults.php" method="post" name="Confirm">
+	         <div class="field">
+	     	     <label for="Date">Date</label>
+	   	       <input id="Date" type="date" name="Date" required autofocus>
+	         </div>
 
-	    <div class="field">
-		<label for="Type">Type of Appointment</label>
-    <select id="type" name = "type">
-			<option>Individual</option>
-			<option>Group</option>
-			<option>Both</option>
-		</select>
-	    </div>
+	         <div class="field">
+        		<label for="Type">Type of Appointment</label>
+            <select id="type" name = "type">
+        			<option>Individual</option>
+        			<option>Group</option>
+        			<option>Both</option>
+        		</select>
+	         </div>
 
-	<br>
+	         <br>
 
-	    <div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
+    	    <div class="nextButton">
+    			<input type="submit" name="next" class="button large go" value="Next">
+        </form>
 	</div>
 	</div>
-	</form>
   </body>
-  
 </html>
