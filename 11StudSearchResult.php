@@ -225,15 +225,27 @@ $COMMON = new Common($debug);
     <div id="login">
       <div id="form">
         <div class="top">
-		<h1>Search for Appointments</h1>
+		<h1>Search Results</h1>
+		<h3>Showing open appointments only</h3>
 	    <div class="field">
-		<form action="02StudHome.php" method="post" name="SearchApp">
-			
+			<?php
+				$date = $_POST['date'];
+				$times = $_POST["time"];
+				$advisor = $_POST["advisor"];
+				
+				$datetimes = array();
+				
+				$sql = "select * from `Proj2Appointments` where `Time` like '%times%' or `Time` like '$date'";
+				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+				$row = mysql_fetch_row($rs);
+				
+			?>
         </div>
+		<form action="02StudHome.php" method="post" name="SearchApp">
 	    <div class="nextButton">
 			<input type="submit" name="done" class="button large go" value="Done">
 	    </div>
-		</div>
 		</form>
+		</div>
   </body>
 </html>

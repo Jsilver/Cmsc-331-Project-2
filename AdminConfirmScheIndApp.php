@@ -9,7 +9,7 @@ $COMMON = new Common($debug);
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Print Schedule</title>
+    <title>Confirm Individual Appointments Creation</title>
     <script type="text/javascript">
     function saveValue(target){
 	var stepVal = document.getElementById(target).value;
@@ -270,7 +270,7 @@ $COMMON = new Common($debug);
 					$majorDB .= $m . " ";
 					$majorPrint .= $m . ", ";
 				}
-        $majorPrint = substr($majorPrint, 0, -2);
+				$majorPrint = substr($majorPrint, 0, -2);
 			}
 			
 			//get advisor id
