@@ -270,6 +270,7 @@ $COMMON = new Common($debug);
 					$majorDB .= $m . " ";
 					$majorPrint .= $m . ", ";
 				}
+        $majorPrint = substr($majorPrint, 0, -2);
 			}
 			
 			//get advisor id
@@ -284,7 +285,7 @@ $COMMON = new Common($debug);
 			//insert new app to DB
 			//print app
 			foreach($datetimes as $dt){
-				$sql = "select * from `Proj2Appointments` where `Time` = '$dt'";
+				$sql = "SELECT * from `Proj2Appointments` where `Time` = '$dt' and `AdvisorID` = '$id'";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				$row = mysql_fetch_row($rs);
 				echo date('l, F d, Y g:i A', strtotime($dt)), " <i> Majors included: </i>", $majorPrint;
