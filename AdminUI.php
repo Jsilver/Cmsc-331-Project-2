@@ -3,6 +3,7 @@ session_start();
 $debug = false;
 include('../CommonMethods.php');
 $COMMON = new Common($debug);
+$_SESSION["PassCon"] = false;
 ?>
 
 <!DOCTYPE html>
