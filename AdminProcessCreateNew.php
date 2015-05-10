@@ -12,7 +12,7 @@ if($_POST["PassW"] == $_POST["ConfP"]){
 }
 elseif($_POST["PassW"] != $_POST["ConfP"]){
 	$_SESSION["PassCon"] = true;
-	header('Location: AdminCreateNewApp.php');
+	header('Location: AdminCreateNewAdv.php');
 }
 
 ?>
