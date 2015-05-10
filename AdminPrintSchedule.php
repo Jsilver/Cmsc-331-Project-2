@@ -75,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], textarea {
+      input[type="text"],input[type="date"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -208,13 +208,13 @@ session_start();
           <form action="AdminPrintResults.php" method="post" name="Confirm">
 	         <div class="field">
 	     	     <label for="date">Date</label>
-             <input id="date" type="date" name="date" placeholder="mm/dd/yyyy" autofocus> (mm/dd/yyyy)
+             <input id="date" type="date" name="date" placeholder="mm/dd/yyyy" required autofocus> (mm/dd/yyyy)
 	         </div>
 
 	         <div class="field">
         		<label for="Type">Type of Appointment</label>
             <select id="type" name = "type">
-              <option>Both</option>
+					<option>Both</option>
         			<option>Individual</option>
         			<option>Group</option>
         		</select>
