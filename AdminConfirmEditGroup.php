@@ -225,18 +225,15 @@ session_start();
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
             $stds = mysql_fetch_row($rs);
-            echo($stds);
             if($stds[0]){
               foreach($stds as $element){
-                echo($element);
+                $element = str_replace(' ', '', $element);
                 $sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$element'";
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $sql = "SELECT `Email` FROM `Proj2Students` WHERE `StudentID` = '$element'";
-                echo($sql);
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $ros = mysql_fetch_row($rs);
                 $eml = $ros[0];
-                echo($eml);
                 $message = "The following group appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
                 "Time: $row[0]" . "\r\n" . 
                 "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage.";
@@ -267,7 +264,7 @@ session_start();
             echo("</form>");
             echo("</div>");
             echo("<div class=\"bottom\">");
-            if($stds){
+            if($stds[0]){
               echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
             }
           }
