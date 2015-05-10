@@ -1,5 +1,8 @@
 <?php
 session_start();
+$debug = false;
+include('../CommonMethods.php');
+$COMMON = new Common($debug); 
 ?>
 
 <!DOCTYPE html>
@@ -146,12 +149,12 @@ session_start();
       }
        
       .field{ 
-      margin: 8px 0; 
+      margin: 8px 0;
+	  font-size: 10px;
       }
 
       .field label{ 
       display: block; 
-      font-weight: bold; 
       font-size: 14px; 
       }
 	  
@@ -204,6 +207,45 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
+			<p>Showing results for: </p>
+			<?php
+				$date = $_POST["date"];
+				$times = $_POST["time"];
+				$advisor = $_POST["advisor"];
+				$studID = $_POST["studID"];
+				$studLN = $_POST["studLN"];
+				
+				if($date == ''){ echo "Date: All"; }
+				else{ 
+					echo "Date: ",$date;
+					$date = date('Y-m-d', strtotime($date));
+				}
+				echo "<br>";
+				if(empty($times)){ echo "Time: All"; }
+				else{
+					$i = 0;
+					echo "Time: ";
+					foreach($times as $t){
+						echo ++$i, ". ", date('g:i A', strtotime($t)), " ";
+					}
+				}
+				echo "<br>";
+				if($advisor == ''){ echo "Advisor: All appointments"; }
+				elseif($advisor == 'I'){ echo "Advisor: All individual appointments"; }
+				elseif($advisor == '0'){ echo "Advisor: All group appointments"; }
+				else{
+					$sql = "select * from Proj2Advisors where `id` = '$advisor'";
+					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+					while($row = mysql_fetch_row($rs)){
+						echo "Advisor: ", $row[1], " ", $row[2];
+					}
+				}
+				echo"<br>";
+				
+				?>
+				<br><br><label>
+		
+		
 		<form method="link" action="AdminUI.php">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
 		</form>

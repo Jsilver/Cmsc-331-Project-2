@@ -242,13 +242,13 @@ $advisorName = $row[1]." ".$row[2];
 		<form action = "10StudConfirmSch.php" method = "post" name = "SelectTime">
 	    <?php
 			if ($_SESSION["advisor"] != "Group"){
-				$sql = "select * from Proj2Appointments where `AdvisorID` = '$localAdvisor' and `EnrolledNum` = 0 and (`Major` like '%$localMaj%' or `Major` = '')";
+				$sql = "select * from Proj2Appointments where `AdvisorID` = '$localAdvisor' and `EnrolledNum` = 0 and (`Major` like '%$localMaj%' or `Major` = '') order by `Time` ASC";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Individual Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment with ",$advisorName,":</label><br>";
 			}
 			else{
-				$sql = "select * from Proj2Appointments where `AdvisorID` = 0 and `EnrolledNum` < `Max` and (`Major` like '%$localMaj%' or `Major` = '')";
+				$sql = "select * from Proj2Appointments where `AdvisorID` = 0 and `EnrolledNum` < `Max` and (`Major` like '%$localMaj%' or `Major` = '') order by `Time` ASC";
 				$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 				echo "<h2>Group Advising</h2><br>";
 				echo "<label for='prompt'>Select appointment:</label><br>";
@@ -256,7 +256,7 @@ $advisorName = $row[1]." ".$row[2];
 			while($row = mysql_fetch_row($rs)){
 				$datephp = strtotime($row[1]);
 				echo "<label for='",$row[0],"'>";
-				echo "<input id='",$row[0],"'type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>"; //Time is index1 for both DBs
+				echo "<input id='",$row[0],"'type='radio' name='appTime' required value='", $row[1], "'>", date('l, F d, Y g:i A', $datephp) ,"</label><br>";
 			}
 		?>
         </div>
