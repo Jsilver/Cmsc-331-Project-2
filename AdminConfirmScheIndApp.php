@@ -9,7 +9,7 @@ $COMMON = new Common($debug);
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Confirm Individual Appointments Creation</title>
+    <title>Schedule Individual Appointment</title>
     <script type="text/javascript">
     function saveValue(target){
 	var stepVal = document.getElementById(target).value;

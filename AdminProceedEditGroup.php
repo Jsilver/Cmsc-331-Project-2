@@ -6,11 +6,17 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Admin</title>
+    <title>Edit Group Appointment</title>
+    <script type="text/javascript">
+    function saveValue(target){
+      var stepVal = document.getElementById(target).value;
+      alert("Value: " + stepVal);
+    }
+    </script>
     <style type="text/css">
       html{ 
       background-color: 
-      #99CCFF;  
+      #99CCFF; 
       font-family: Arial; 
       font-size: 13px; 
       position: relative; 
@@ -36,25 +42,25 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 600px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
       }
 
-	  h1{ 
+  h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
-	  text-align: center;
+    text-align: center;
       line-height: 50px; 
       margin: 0; 
       padding: 0; 
       }
-	  
+    
       h2{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 24px; 
-	  text-align: center;
+    text-align: center;
       line-height: 30px; 
       margin: 0; 
       padding: 0; 
@@ -69,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], input[type="password"], textarea {
+      input[type="text"],input[type="email"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -81,13 +87,13 @@ session_start();
         -webkit-border-radius: 4px;
         width: 262px;
       }
-	  
-	  select{
-	  font-size: 18px;
-	  font-family: Arial, Helvetica, sans-serif;
-	  color: #444;
-	  position: relative;
-	  }
+    
+    select{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #444;
+    position: relative;
+    }
       
       .button {
         background-color: #768089;
@@ -126,7 +132,7 @@ session_start();
         font-size: 16px;
         height: 32px;
         padding: 0 16px;
-		position: center;
+    position: center;
       }
       
       .button.go {
@@ -148,7 +154,7 @@ session_start();
       font-weight: bold; 
       font-size: 14px; 
       }
-	  
+    
       .actions{ 
       text-align: right; 
       }
@@ -193,68 +199,49 @@ session_start();
         .button-item { margin: 8px 8px 12px; }
       }
     </style>
-
-    // <script type="text/javascript">
-    //   window.onload = function () {
-    //       document.getElementById("PassW").onchange = validatePassword;
-    //       document.getElementById("ConfP").onchange = validatePassword;
-    //   }
-    //   function validatePassword(){
-    //     var pass2=document.getElementById("ConfP").value;
-    //     var pass1=document.getElementById("PassW").value;
-    //     if(pass1!=pass2)
-    //         document.getElementById("ConfP").setCustomValidity("Passwords Don't Match");
-    //     else
-    //         document.getElementById("PassW").setCustomValidity('');  
-    //     //empty string means no validation error
-    //   }
-    // </script>
-  </head>
-   <body>
+  </head> 
+  <body>
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Create New Advisor Account</h2>
-		<?php
-      if($_SESSION["PassCon"] == true){
-        echo "<h3 style='color:red'>Passwords do not match!!</h3>";
-      }
-    ?>
-		<form action="AdminProcessCreateNew.php" method="post" name="Create">
-		<div class="field">
-	      		<label for="firstN">First Name</label>
-	      		<input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
-	    	</div>
+          <h2>Edit Group Appointment</h2>
+          <?php
+            $debug = false;
+            include('../CommonMethods.php');
+            $COMMON = new Common($debug);
 
-	    	<div class="field">
-	     		<label for="lastN">Last Name</label>
-	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>	
+            $group = $_SESSION["GroupApp"];
+            parse_str($group);
 
-		<div class="field">
-	     		<label for="UserN">Username</label>
-	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	 
+            echo("<form action=\"AdminConfirmEditGroup.php\" method=\"post\" name=\"Edit\">");
+            echo("<b>Date: $row[0]</b><br>");
+            echo("<b>Majors included: ");
+            if($row[1]){
+              echo("$row[1]</b><br>"); 
+            }
+            else{
+              echo("Available to all majors</b><br>"); 
+            }
+            echo("<b>Number of students enrolled: $row[2] </b><br>");
+            echo("<b>Student limit: ");
+            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[2]\" max=\"$row[3]\" value=\"$row[3]\" /></b>");
 
-		<div class="field">
-	     		<label for="PassW">Password</label>
-	      		<input id="PassW" size="20" maxlength="50" type="password" name="PassW" required>
-	   	</div>	
+            echo("<br><br>");
 
-		<div class="field">
-	     		<label for="ConfP">Confirm Password</label>
-	      		<input id="ConfP" size="20" maxlength="50" type="password" name="ConfP" required>
-	   	</div>	
-		<br>
-
-		<div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    	</div>
-
-	</div>
-	</div>
-	</div>
-	</form>
+            echo("<div class=\"nextButton\">");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
+            echo("</div>");
+            echo("</div>");
+            echo("<div class=\"bottom\">");
+            if($row[2] > 0){
+              echo "<p style='color:red'>Note: There are currently $row[2] students enrolled in this appointment. <br>
+                    The student limit cannot be changed to be under this amount.</p>";
+            }
+            echo("</div>");
+          ?>
+  </div>
+  </div>
+  </form>
   </body>
   
 </html>

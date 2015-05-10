@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Print Schedule</title>
+    <title>Edit Individual Appointment</title>
     <script type="text/javascript">
     function saveValue(target){
 	var stepVal = document.getElementById(target).value;
@@ -230,9 +230,9 @@ session_start();
 
             echo("<b>Time: $row[0]</b><br>");
             echo("<b>Advisor: $row[1] $row[2]</b><br>");
-            echo("<b>Group: ");
+            echo("<b>Majors included: ");
             if($row[3]){
-              echo("$row[3]</b>"); 
+              echo("$row[3]</b><br>"); 
             }
             else{
               echo("Available to all majors</b><br>"); 
@@ -243,19 +243,27 @@ session_start();
               $message = "The following appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
                 "Time: $row[0]" . "\r\n" . 
                 "Advisor: $row[1] $row[2]" . "\r\n" . 
-                "Student: $std";
+                "Student: $std" . "\r\n" . 
+                "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage.";
               mail($eml, "Your Advising Appointment Has Been Deleted", $message);
             }
             else{
               echo("Empty</b>");
             }
+
+            echo("<br><br>");
+            echo("<form method=\"link\" action=\"AdminUI.php\">");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
+            echo("</form>");
+            echo("<div class=\"nextButton\">");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
+            echo("</div>");
+            echo("</div>");
+            echo("<div class=\"bottom\">");
+            if($row[4]){
+              echo "<p style='color:red'>$std has been notified of the cancellation.</p>";
+            }
           ?>
-          <br>
-		<form method="link" action="AdminUI.php">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
-		</form>
-	</div>
-	</div>
 	</div>
 	</form>
   </body>

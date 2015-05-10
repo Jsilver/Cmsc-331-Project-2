@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Select Appointment Type</title>
+    <title>Schedule Appointment</title>
     <style type="text/css">
       html{ 
       background-color: 

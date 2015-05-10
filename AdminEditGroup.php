@@ -1,16 +1,17 @@
 <?php
 session_start();
+$_SESSION["Delete"] = false;
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Print Schedule</title>
+    <title>Edit Group Appointment</title>
     <script type="text/javascript">
     function saveValue(target){
-	var stepVal = document.getElementById(target).value;
-	alert("Value: " + stepVal);
+  var stepVal = document.getElementById(target).value;
+  alert("Value: " + stepVal);
     }
     </script>
     <style type="text/css">
@@ -48,19 +49,19 @@ session_start();
       border-radius: 8px; 
       }
 
-	h1{ 
+  h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
-	  text-align: center;
+    text-align: center;
       line-height: 50px; 
       margin: 0; 
       padding: 0; 
       }
-	  
+    
       h2{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 24px; 
-	  text-align: center;
+    text-align: center;
       line-height: 30px; 
       margin: 0; 
       padding: 0; 
@@ -87,13 +88,13 @@ session_start();
         -webkit-border-radius: 4px;
         width: 262px;
       }
-	  
-	  select{
-	  font-size: 18px;
-	  font-family: Arial, Helvetica, sans-serif;
-	  color: #444;
-	  position: relative;
-	  }
+    
+    select{
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #444;
+    position: relative;
+    }
       
       .button {
         background-color: #768089;
@@ -132,7 +133,7 @@ session_start();
         font-size: 16px;
         height: 32px;
         padding: 0 16px;
-		position: center;
+    position: center;
       }
       
       .button.go {
@@ -154,7 +155,7 @@ session_start();
       font-weight: bold; 
       font-size: 14px; 
       }
-	  
+    
       .actions{ 
       text-align: right; 
       }
@@ -199,18 +200,71 @@ session_start();
         .button-item { margin: 8px 8px 12px; }
       }
     </style>
-  </head>
+  </head> 
   <body>
     <div id="login">
       <div id="form">
         <div class="top">
-		<form method="link" action="AdminUI.php">
-			<input type="submit" name="next" class="button large go" value="Return to Home">
-		</form>
-	</div>
-	</div>
-	</div>
-	</form>
+          <h2>Select which appointment you would like to change: </h2>
+          <?php
+            $debug = false;
+            include('../CommonMethods.php');
+            $COMMON = new Common($debug);
+
+            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` = '0'";
+            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+            $row = mysql_fetch_array($rs, MYSQL_NUM); 
+            if($row){
+              echo("<form action=\"AdminProcessEditGroup.php\" method=\"post\" name=\"Confirm\">");
+
+              echo("<input type=\"radio\" name=\"GroupApp\" 
+                required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
+              echo("<b>Time: $row[1] Majors Included: ");
+              if($row[3]){
+                echo("$row[3]"); 
+              }
+              else{
+                echo("Available to all majors"); 
+              }
+
+              echo("<br>");
+              echo("Number of students enrolled: $row[5] Number of seats: $row[6]");
+
+              echo("<br><br>");
+              while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
+                echo("<input type=\"radio\" name=\"GroupApp\" 
+                  required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
+                echo("<b>Time: $row[1] Majors Included: ");
+                if($row[3]){
+                  echo("$row[3]"); 
+                }
+                else{
+                  echo("Available to all majors"); 
+                }
+
+                echo("<br>");
+                echo("Number of students enrolled: $row[5] Number of seats: $row[6]");
+                
+                echo("<br><br>");
+              }
+              echo("<div class=\"nextButton\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
+              echo("<input style=\"margin-left: 8px\" type=\"submit\" name=\"next\" class=\"button large go\" value=\"Edit Appointment\">");
+              echo("</div>");
+            }
+            else{
+              echo("<br><b>There are currently no group appointments scheduled at the current moment.</b>");
+              echo("<br><br>");
+              echo("<form method=\"link\" action=\"AdminUI.php\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
+              echo("</form>");
+            }
+          ?>
+
+  </div>
+  </div>
+  </div>
+  </form>
   </body>
   
 </html>

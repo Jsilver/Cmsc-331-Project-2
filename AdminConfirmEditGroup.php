@@ -6,11 +6,17 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Create New Admin</title>
+    <title>Edit Group Appointment</title>
+    <script type="text/javascript">
+    function saveValue(target){
+	var stepVal = document.getElementById(target).value;
+	alert("Value: " + stepVal);
+    }
+    </script>
     <style type="text/css">
       html{ 
       background-color: 
-      #99CCFF;  
+      #99CCFF; 
       font-family: Arial; 
       font-size: 13px; 
       position: relative; 
@@ -36,13 +42,13 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 550px; 
+      width: 600px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
       }
 
-	  h1{ 
+	h1{ 
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
@@ -69,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], input[type="password"], textarea {
+      input[type="text"],input[type="email"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -193,64 +199,94 @@ session_start();
         .button-item { margin: 8px 8px 12px; }
       }
     </style>
-
-    // <script type="text/javascript">
-    //   window.onload = function () {
-    //       document.getElementById("PassW").onchange = validatePassword;
-    //       document.getElementById("ConfP").onchange = validatePassword;
-    //   }
-    //   function validatePassword(){
-    //     var pass2=document.getElementById("ConfP").value;
-    //     var pass1=document.getElementById("PassW").value;
-    //     if(pass1!=pass2)
-    //         document.getElementById("ConfP").setCustomValidity("Passwords Don't Match");
-    //     else
-    //         document.getElementById("PassW").setCustomValidity('');  
-    //     //empty string means no validation error
-    //   }
-    // </script>
   </head>
-   <body>
+  <body>
     <div id="login">
       <div id="form">
         <div class="top">
-		<h2>Create New Advisor Account</h2>
-		<?php
-      if($_SESSION["PassCon"] == true){
-        echo "<h3 style='color:red'>Passwords do not match!!</h3>";
-      }
-    ?>
-		<form action="AdminProcessCreateNew.php" method="post" name="Create">
-		<div class="field">
-	      		<label for="firstN">First Name</label>
-	      		<input id="firstN" size="20" maxlength="50" type="text" name="firstN" required autofocus>
-	    	</div>
+        <?php
+          $delete = $_SESSION["Delete"];
+          $group = $_SESSION["GroupApp"];
+          parse_str($group);
+          $debug = false;
+          include('../CommonMethods.php');
+          $COMMON = new Common($debug);
 
-	    	<div class="field">
-	     		<label for="lastN">Last Name</label>
-	      		<input id="lastN" size="20" maxlength="50" type="text" name="lastN" required>
-	   	</div>	
+          if($delete == true){
+            echo("<h2>The following appointment has been removed: </h2><br>");
 
-		<div class="field">
-	     		<label for="UserN">Username</label>
-	      		<input id="UserN" size="20" maxlength="50" type="text" name="UserN" required>
-	   	</div>	 
+            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = 'row[0]'
+              AND `AdvisorID` = '$0' 
+              AND `Major` = '$row[1]' 
+              AND `EnrolledNum` = '$row[2]'
+              AND `Max` = '$row[3]'";
+            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-		<div class="field">
-	     		<label for="PassW">Password</label>
-	      		<input id="PassW" size="20" maxlength="50" type="password" name="PassW" required>
-	   	</div>	
+            $stds = mysql_fetch_row($rs);
+            if($stds){
+              foreach($stds as $element){
+                $sql = "SELECT `Email` FROM `Proj2Students` WHERE `StudentID` = '$element'";
+                $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+                $ros = mysql_fetch_row($rs);
+                $eml = $ros[0];
+                $message = "The following group appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
+                "Time: $row[0]" . "\r\n" . 
+                "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage.";
+                mail($eml, "Your Advising Appointment Has Been Deleted", $message);
+              }
+            }
 
-		<div class="field">
-	     		<label for="ConfP">Confirm Password</label>
-	      		<input id="ConfP" size="20" maxlength="50" type="password" name="ConfP" required>
-	   	</div>	
-		<br>
+            $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' 
+              AND `AdvisorID` = '$0' 
+              AND `Major` = '$row[1]' 
+              AND `EnrolledNum` = '$row[2]'
+              AND `Max` = '$row[3]'";
+            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-		<div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    	</div>
-
+            echo("<b>Date: $row[0]</b><br>");
+            echo("<b>Majors included: ");
+            if($row[1]){
+              echo("$row[1]</b><br>"); 
+            }
+            else{
+              echo("Available to all majors</b><br>"); 
+            }
+            echo("<b>Number of students enrolled: $row[2] </b><br>");
+            echo("<b>Student limit: $row[3]</b>");
+          }
+          else{
+            echo("<h2>The following appointment has been changed: </h2><br>");
+            echo("<b>Date: $row[0]</b><br>");
+            echo("<b>Majors included: ");
+            if($row[1]){
+              echo("$row[1]</b><br>"); 
+            }
+            else{
+              echo("Available to all majors</b><br>"); 
+            }
+            echo("<b>Number of students enrolled: $row[2] </b><br>");
+            echo("<b>Student limit: $row[3]</b>");
+            echo("<br><br><h3>To</h3><br><br>");
+            $limit = $_POST["stepper"];
+            echo("<b>Date: $row[0]</b><br>");
+            echo("<b>Majors included: ");
+            if($row[1]){
+              echo("$row[1]</b><br>"); 
+            }
+            else{
+              echo("Available to all majors</b><br>"); 
+            }
+            echo("<b>Number of students enrolled: $row[2] </b><br>");
+            echo("<b>Student limit: $limit</b>");
+            $sql = "UPDATE `Proj2Appointments` SET `Max`='$limit' WHERE `Time` = '$row[0]' 
+                    AND `AdvisorID` = '$0' AND `Major` = '$row[1]' 
+                    AND `EnrolledNum` = '$row[2]' AND `Max` = '$row[3]'";
+            $rs = $COMMON->executeQuery($sql, "Advising Appointments"); 
+          }
+        ?>
+		    <form method="link" action="AdminUI.php">
+			   <input type="submit" name="next" class="button large go" value="Return to Home">
+		    </form>
 	</div>
 	</div>
 	</div>

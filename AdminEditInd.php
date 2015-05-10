@@ -6,7 +6,7 @@ session_start();
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Print Schedule</title>
+    <title>Edit Individual Appointment</title>
     <script type="text/javascript">
     function saveValue(target){
 	var stepVal = document.getElementById(target).value;
@@ -215,7 +215,7 @@ session_start();
             $row = mysql_fetch_array($rs, MYSQL_NUM); 
             if($row){
               echo("<form action=\"AdminConfirmEditInd.php\" method=\"post\" name=\"Confirm\">");
-
+              echo("<br>");
               $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
               $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
               $secrow = mysql_fetch_row($secrs);
@@ -278,17 +278,22 @@ session_start();
 
                 echo("<br><br>");
               }
-              echo "<h3 style='color:red'>Please note that individual appointments can only be removed from schedule.</h3>";
+              echo("<div class=\"nextButton\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
+              echo("</div>");
+              echo("</div>");
+              echo("<div class=\"bottom\">");
+              echo "<p style='color:red'>Please note that individual appointments can only be removed from schedule.</p>";
+              echo("</div>");
             }
             else{
-              echo("</form><b>There are currently no individual appointments scheduled at the current moment.</b>");
+              echo("<br><b>There are currently no individual appointments scheduled at the current moment.</b>");
               echo("<br><br>");
+              echo("<form method=\"link\" action=\"AdminUI.php\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
+              echo("</form>");
             }
           ?>
-          <div class="nextButton">
-            <input type="submit" name="next" class="button large go" value="Remove Appointment">
-          </div>
-	</div>
 	</div>
 	</div>
 	</form>
