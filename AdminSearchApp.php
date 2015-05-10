@@ -259,6 +259,15 @@ $COMMON = new Common($debug);
 			<label for="studLN">Student Last Name</label>
 			<input id="studLN" type="text" name="studLN">
 	    </div>
+		
+		<div class="field">
+			<label for="appStatus">Filter Open/Closed Appointments</label>
+			<select id="advisor" name="advisor">
+				<option value="">All</option>
+				<option value="0">Open</option>
+				<option value="1">Closed</option>
+			</select>
+	    </div>
 
 	<div class="nextButton">
 			<input type="submit" name="go" class="button large go" value="Go">
