@@ -194,7 +194,7 @@ session_start();
       }
     </style>
 
-    // <script type="text/javascript">
+      <script type="text/javascript">
     //   window.onload = function () {
     //       document.getElementById("PassW").onchange = validatePassword;
     //       document.getElementById("ConfP").onchange = validatePassword;
