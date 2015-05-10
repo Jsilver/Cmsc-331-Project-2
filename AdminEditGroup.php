@@ -43,7 +43,7 @@ $_SESSION["Delete"] = false;
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 550px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -62,7 +62,7 @@ $_SESSION["Delete"] = false;
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 24px; 
     text-align: center;
-      line-height: 30px; 
+      line-height: 40px; 
       margin: 0; 
       padding: 0; 
       }
@@ -76,7 +76,7 @@ $_SESSION["Delete"] = false;
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], textarea {
+      input[type="text"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -152,7 +152,6 @@ $_SESSION["Delete"] = false;
 
       .field label{ 
       display: block; 
-      font-weight: bold; 
       font-size: 14px; 
       }
     
@@ -205,7 +204,9 @@ $_SESSION["Delete"] = false;
     <div id="login">
       <div id="form">
         <div class="top">
-          <h2>Select which appointment you would like to change: </h2>
+          <h1>Edit Group Appointment</h1>
+		  <h2>Select an appointment to change</h2>
+		  <div class="field">
           <?php
             $debug = false;
             include('../CommonMethods.php');
@@ -214,43 +215,48 @@ $_SESSION["Delete"] = false;
             $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` = '0' ORDER BY `Time`";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
             $row = mysql_fetch_array($rs, MYSQL_NUM); 
+			//first item in row
             if($row){
               echo("<form action=\"AdminProcessEditGroup.php\" method=\"post\" name=\"Confirm\">");
 
-              echo("<input type=\"radio\" name=\"GroupApp\" 
+              echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
                 required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
-              echo("<b>Time: $row[1] Majors Included: ");
+              echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>Majors included: ");
               if($row[3]){
                 echo("$row[3]"); 
               }
               else{
                 echo("Available to all majors"); 
               }
-
               echo("<br>");
-              echo("Number of students enrolled: $row[5] Number of seats: $row[6]");
-
+              echo("Number of students enrolled: $row[5] <br>Number of seats: $row[6]");
+			  echo("</label>");
+			
+			//rest of row
               echo("<br><br>");
               while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-                echo("<input type=\"radio\" name=\"GroupApp\" 
+                echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"GroupApp\" 
                   required value=\"row[]=$row[1]&row[]=$row[3]&row[]=$row[5]&row[]=$row[6]\">");
-                echo("<b>Time: $row[1] Majors Included: ");
+                echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>Majors included: ");
                 if($row[3]){
                   echo("$row[3]"); 
                 }
                 else{
                   echo("Available to all majors"); 
                 }
-
                 echo("<br>");
-                echo("Number of students enrolled: $row[5] Number of seats: $row[6]");
-                
+                echo("Number of students enrolled: $row[5] <br>Number of seats: $row[6]");
+				echo("</label>");
                 echo("<br><br>");
               }
               echo("<div class=\"nextButton\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
-              echo("<input style=\"margin-left: 8px\" type=\"submit\" name=\"next\" class=\"button large go\" value=\"Edit Appointment\">");
+              echo("<input style=\"margin-left: 10px\" type=\"submit\" name=\"next\" class=\"button large go\" value=\"Edit Appointment\">");
               echo("</div>");
+			  echo("</form>");
+			  echo("<form method=\"link\" action=\"AdminUI.php\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large\" value=\"Cancel\">");
+              echo("</form>");
             }
             else{
               echo("<br><b>There are currently no group appointments scheduled at the current moment.</b>");
@@ -260,11 +266,10 @@ $_SESSION["Delete"] = false;
               echo("</form>");
             }
           ?>
-
   </div>
   </div>
   </div>
-  </form>
+  </div>
   </body>
   
 </html>

@@ -42,7 +42,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 550px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -147,6 +147,7 @@ session_start();
        
       .field{ 
       margin: 8px 0; 
+	  font-size: 14px;
       }
 
       .field label{ 
@@ -204,7 +205,8 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-          <h2>The following appointment has been removed: </h2><br>
+          <h1>Removed Appointment</h1><br>
+		  <div class="field">
           <?php
             $debug = false;
             include('../CommonMethods.php');
@@ -228,16 +230,16 @@ session_start();
             $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' AND `AdvisorID` = '$adv' AND `Major` = '$row[3]' AND `EnrolledID` = '$row[4]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-            echo("<b>Time: $row[0]</b><br>");
-            echo("<b>Advisor: $row[1] $row[2]</b><br>");
-            echo("<b>Majors included: ");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Advisor: $row[1] $row[2]<br>");
+            echo("Majors included: ");
             if($row[3]){
-              echo("$row[3]</b><br>"); 
+              echo("$row[3]<br>"); 
             }
             else{
-              echo("Available to all majors</b><br>"); 
+              echo("Available to all majors<br>"); 
             }
-            echo("<b>Enrolled: ");
+            echo("Enrolled: ");
             if($row[4]){
               echo("$std</b>");
               $sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$row[4]'";
@@ -250,13 +252,14 @@ session_start();
               mail($eml, "Your Advising Appointment Has Been Deleted", $message); 
             }
             else{
-              echo("Empty</b>");
+              echo("Empty");
             }
 			?>
 			<br><br>
 			<form method="link" action="AdminUI.php">
 				<input type="submit" name="home" class="button large go" value="Return to Home">
 			</form>
+		</div>
     </div>    
 	</div>
 		<?php

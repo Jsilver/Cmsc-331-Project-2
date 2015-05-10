@@ -42,7 +42,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 550px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -52,7 +52,7 @@ session_start();
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 36px; 
 	  text-align: center;
-      line-height: 50px; 
+      line-height: 40px; 
       margin: 0; 
       padding: 0; 
       }
@@ -61,7 +61,7 @@ session_start();
       font-family: "Helvetica Neue", Arial, Helvetica, sans-serif; 
       font-size: 24px; 
 	  text-align: center;
-      line-height: 30px; 
+      line-height: 50px; 
       margin: 0; 
       padding: 0; 
       }
@@ -147,6 +147,7 @@ session_start();
        
       .field{ 
       margin: 8px 0; 
+	  font-size: 16px;
       }
 
       .field label{ 
@@ -204,6 +205,7 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
+		<div class="field">
         <?php
           $delete = $_SESSION["Delete"];
           $group = $_SESSION["GroupApp"];
@@ -213,7 +215,7 @@ session_start();
           $COMMON = new Common($debug);
 
           if($delete == true){
-            echo("<h2>The following appointment has been removed: </h2><br>");
+            echo("<h1>Removed Appointment</h1><br>");
 
             $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = 'row[0]'
               AND `AdvisorID` = '$0' 
@@ -245,16 +247,16 @@ session_start();
               AND `Max` = '$row[3]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-            echo("<b>Date: $row[0]</b><br>");
-            echo("<b>Majors included: ");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Majors included: ");
             if($row[1]){
-              echo("$row[1]</b><br>"); 
+              echo("$row[1]<br>"); 
             }
             else{
-              echo("Available to all majors</b><br>"); 
+              echo("Available to all majors<br>"); 
             }
-            echo("<b>Number of students enrolled: $row[2] </b><br>");
-            echo("<b>Student limit: $row[3]</b>");
+            echo("Number of students enrolled: $row[2]<br>");
+            echo("Student limit: $row[3]");
             echo("<br><br>");
             echo("<form method=\"link\" action=\"AdminUI.php\">");
             echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
@@ -266,20 +268,21 @@ session_start();
             }
           }
           else{
-            echo("<h2>The following appointment has been changed: </h2><br>");
-            echo("<b>Date: $row[0]</b><br>");
-            echo("<b>Majors included: ");
+            echo("<h1>Changed Appointment</h1><br>");
+			echo("<h2>Previous Appointment:</h2>");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Majors included: ");
             if($row[1]){
-              echo("$row[1]</b><br>"); 
+              echo("$row[1]<br>"); 
             }
             else{
-              echo("Available to all majors</b><br>"); 
+              echo("Available to all majors<br>"); 
             }
-            echo("<b>Number of students enrolled: $row[2] </b><br>");
-            echo("<b>Student limit: $row[3]</b>");
-            echo("<br><br><h3>To</h3><br><br>");
+            echo("Number of students enrolled: $row[2]<br>");
+            echo("Student limit: $row[3]");
+            echo("<h2>Updated Appointment:</h2>");
             $limit = $_POST["stepper"];
-            echo("<b>Date: $row[0]</b><br>");
+            echo("<b>Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "</b><br>");
             echo("<b>Majors included: ");
             if($row[1]){
               echo("$row[1]</b><br>"); 
@@ -299,6 +302,7 @@ session_start();
             echo("</form>");
           }
         ?>
+	</div>
 	</div>
 	</div>
 	</form>

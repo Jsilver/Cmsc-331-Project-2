@@ -230,7 +230,7 @@ session_start();
 
               echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
                 required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-              echo("Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
+              echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>Advisor: $secrow[0] $secrow[1] <br> Majors included: ");
               if($row[3]){
                 echo("$row[3]"); 
               }
@@ -261,7 +261,7 @@ session_start();
 
                 echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
                   required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-                echo("Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
+                echo("Time: ". date('l, F d, Y g:i A', strtotime($row[1])). "<br>Advisor: $secrow[0] $secrow[1] <br> Majors included: ");
                 if($row[3]){
                   echo("$row[3]"); 
                 }
