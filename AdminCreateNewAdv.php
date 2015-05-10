@@ -194,7 +194,7 @@ session_start();
       }
     </style>
 
-      <script type="text/javascript">
+     <script type="text/javascript">
     //   window.onload = function () {
     //       document.getElementById("PassW").onchange = validatePassword;
     //       document.getElementById("ConfP").onchange = validatePassword;
@@ -248,13 +248,15 @@ session_start();
 		<br>
 
 		<div class="nextButton">
-			<input type="submit" name="next" class="button large go" value="Next">
-	    	</div>
+			<input type="submit" name="next" class="button large go" value="Submit">
+	    </div>
+		</form>
+		<form method="link" action="AdminUI.php">
+			<input type="submit" name="home" class="button large" value="Return to Home">
+		</form>
 
 	</div>
 	</div>
 	</div>
-	</form>
   </body>
-  
 </html>
