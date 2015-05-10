@@ -230,7 +230,7 @@ session_start();
 				$sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
 				WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-        $row = mysql_fetch_array($rs, MYSQL_NUM);
+        $row = mysql_fetch_array($rs, MYSQL_NUM); 
         if($row){
           echo("<b>Time: $row[0] Majors Included: ");
           if($row[1]){

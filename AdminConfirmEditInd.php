@@ -199,95 +199,61 @@ session_start();
         .button-item { margin: 8px 8px 12px; }
       }
     </style>
-  </head> 
+  </head>
   <body>
     <div id="login">
       <div id="form">
         <div class="top">
-          <h2>Select which appointment you would like to change: </h2>
+          <h2>The following appointment has been removed: </h2><br>
           <?php
             $debug = false;
             include('../CommonMethods.php');
             $COMMON = new Common($debug);
+            $ind = $_POST["IndApp"];
+            parse_str($ind);
 
-            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0'";
+            $sql = "SELECT `id` FROM `Proj2Advisors` WHERE `FirstName` = '$row[1]' AND `LastName` = '$row[2]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
-            $row = mysql_fetch_array($rs, MYSQL_NUM); 
-            if($row){
-              echo("<form action=\"AdminConfirmEditInd.php\" method=\"post\" name=\"Confirm\">");
+            $rod = mysql_fetch_row($rs);
+            $adv = $rod[0];
 
-              $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
-              $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
-              $secrow = mysql_fetch_row($secrs);
+            if($row[4]){
+              $sql = "SELECT `FirstName`, `LastName`, `Email` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
+              $rs = $COMMON->executeQuery($sql, "Advising Appointments");
+              $ros = mysql_fetch_row($rs);
+              $std = $ros[0] . " " . $ros[1];
+              $eml = $ros[2];
+            }
 
-              if($row[4]){
-                $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
-                $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-                $trdrow = mysql_fetch_row($trdrs);
-              }
+            $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' AND `AdvisorID` = '$adv' AND `Major` = '$row[3]' AND `EnrolledID` = '$row[4]'";
+            $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
-              echo("<input type=\"radio\" name=\"IndApp\" 
-                required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-              echo("<b>Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
-              if($row[3]){
-                echo("$row[3]"); 
-              }
-              else{
-                echo("Available to all majors"); 
-              }
-
-              echo("<br>");
-
-              if($row[4]){
-                echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
-              }
-              else{
-                echo("Enrolled: Empty</b>");
-              }
-
-              echo("<br><br>");
-              while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-                $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
-                $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
-                $secrow = mysql_fetch_row($secrs);
-
-                if($row[4]){
-                  $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[4]'";
-                  $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
-                  $trdrow = mysql_fetch_row($trdrs);
-                }
-
-                echo("<input type=\"radio\" name=\"IndApp\" 
-                  required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-                echo("<b>Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
-                if($row[3]){
-                  echo("$row[3]"); 
-                }
-                else{
-                  echo("Available to all majors"); 
-                }
-
-                echo("<br>");
-
-                if($row[4]){
-                  echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
-                }
-                else{
-                  echo("Enrolled: Empty</b>");
-                }
-
-                echo("<br><br>");
-              }
-              echo "<h3 style='color:red'>Please note that individual appointments can only be removed from schedule.</h3>";
+            echo("<b>Time: $row[0]</b><br>");
+            echo("<b>Advisor: $row[1] $row[2]</b><br>");
+            echo("<b>Group: ");
+            if($row[3]){
+              echo("$row[3]</b>"); 
             }
             else{
-              echo("</form><b>There are currently no individual appointments scheduled at the current moment.</b>");
-              echo("<br><br>");
+              echo("Available to all majors</b><br>"); 
+            }
+            echo("<b>Enrolled: ");
+            if($row[4]){
+              echo("$std</b>");
+              $message = "The following appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
+                "Time: $row[0]" . "\r\n" . 
+                "Advisor: $row[1] $row[2]" . "\r\n" . 
+                "Student: $std";
+              mail($eml, "Your Advising Appointment Has Been Deleted", $message);
+            }
+            else{
+              echo("Empty</b>");
             }
           ?>
-          <div class="nextButton">
-            <input type="submit" name="next" class="button large go" value="Remove Appointment">
-          </div>
+          <br>
+		<form method="link" action="AdminUI.php">
+			<input type="submit" name="next" class="button large go" value="Return to Home">
+		</form>
 	</div>
 	</div>
 	</div>
