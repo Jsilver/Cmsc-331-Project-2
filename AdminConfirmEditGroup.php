@@ -217,22 +217,26 @@ session_start();
           if($delete == true){
             echo("<h1>Removed Appointment</h1><br>");
 
-            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = 'row[0]'
-              AND `AdvisorID` = '$0' 
+            $sql = "SELECT `EnrolledID` FROM `Proj2Appointments` WHERE `Time` = '$row[0]'
+              AND `AdvisorID` = '0' 
               AND `Major` = '$row[1]' 
               AND `EnrolledNum` = '$row[2]'
               AND `Max` = '$row[3]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
 
             $stds = mysql_fetch_row($rs);
-            if($stds){
+            echo($stds);
+            if($stds[0]){
               foreach($stds as $element){
+                echo($element);
                 $sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$element'";
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $sql = "SELECT `Email` FROM `Proj2Students` WHERE `StudentID` = '$element'";
+                echo($sql);
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $ros = mysql_fetch_row($rs);
                 $eml = $ros[0];
+                echo($eml);
                 $message = "The following group appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
                 "Time: $row[0]" . "\r\n" . 
                 "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage.";
@@ -241,7 +245,7 @@ session_start();
             }
 
             $sql = "DELETE FROM `Proj2Appointments` WHERE `Time` = '$row[0]' 
-              AND `AdvisorID` = '$0' 
+              AND `AdvisorID` = '0' 
               AND `Major` = '$row[1]' 
               AND `EnrolledNum` = '$row[2]'
               AND `Max` = '$row[3]'";
