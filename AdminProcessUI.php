@@ -14,7 +14,7 @@ elseif($_POST["next"] == 'Search for an appointment'){
 	header('Location: AdminSearchApp.php');
 }
 elseif($_POST["next"] == 'Create new Admin Account'){
-	header('Location: AdminCreateNewApp.php');
+	header('Location: AdminCreateNewAdv.php');
 }
 
 ?>
