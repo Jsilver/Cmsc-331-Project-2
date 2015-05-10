@@ -205,7 +205,7 @@ session_start();
       <div id="form">
         <div class="top">
 		<?php
-			$date = $_POST["Date"];
+			$date = $_POST["date"];
 			$type = $_POST["type"];
 			
 			$debug = false;
@@ -225,10 +225,11 @@ session_start();
       $LastName = $row[1];
 		
 			echo("<h2>Schedule for $date</h2>");
+      $date = date('Y-m-d', strtotime($date));
 			if($_POST["type"] == 'Both'){
 				echo("<h3>Group Appointments:</h3>");
 				$sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
-				WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
+				WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0' ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM); 
         if($row){
@@ -258,7 +259,7 @@ session_start();
 
 				echo("<h3>Individual Appointments for $FirstName $LastName:</h3>");
         $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
-        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
+        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id' ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
@@ -278,7 +279,7 @@ session_start();
 			elseif($_POST["type"] == 'Individual'){
         echo("<h3>Individual Appointments for $FirstName $LastName:</h3>");
         $sql = "SELECT `Time`, `Major`FROM `Proj2Appointments` 
-        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id'";
+        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '$id' ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
@@ -298,7 +299,7 @@ session_start();
 			elseif($_POST["type"] == 'Group'){
 				echo("<h3>Group Appointments:</h3>");
         $sql = "SELECT `Time`, `Major`, `EnrolledNum`, `Max` FROM `Proj2Appointments` 
-        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0'";
+        WHERE `Time` LIKE '$date%' AND `AdvisorID` = '0' ORDER BY `Time`";
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){

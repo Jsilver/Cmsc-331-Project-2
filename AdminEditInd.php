@@ -210,7 +210,7 @@ session_start();
             include('../CommonMethods.php');
             $COMMON = new Common($debug);
 
-            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0'";
+            $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0' ORDER BY `Time`";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
             $row = mysql_fetch_array($rs, MYSQL_NUM); 
             if($row){

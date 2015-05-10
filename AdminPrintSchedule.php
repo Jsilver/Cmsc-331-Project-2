@@ -207,16 +207,16 @@ session_start();
 		      <h1>Print Schedule</h1>
           <form action="AdminPrintResults.php" method="post" name="Confirm">
 	         <div class="field">
-	     	     <label for="Date">Date</label>
-	   	       <input id="Date" type="date" name="Date" required autofocus>
+	     	     <label for="date">Date</label>
+             <input id="date" type="date" name="date" placeholder="mm/dd/yyyy" autofocus> (mm/dd/yyyy)
 	         </div>
 
 	         <div class="field">
         		<label for="Type">Type of Appointment</label>
             <select id="type" name = "type">
+              <option>Both</option>
         			<option>Individual</option>
         			<option>Group</option>
-        			<option>Both</option>
         		</select>
 	         </div>
 
