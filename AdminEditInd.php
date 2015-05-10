@@ -151,7 +151,6 @@ session_start();
 
       .field label{ 
       display: block; 
-      font-weight: bold; 
       font-size: 14px; 
       }
 	  
@@ -205,6 +204,8 @@ session_start();
       <div id="form">
         <div class="top">
           <h2>Select which appointment you would like to change: </h2>
+		  <div class="field">
+		  
           <?php
             $debug = false;
             include('../CommonMethods.php');
@@ -213,6 +214,7 @@ session_start();
             $sql = "SELECT * FROM `Proj2Appointments` WHERE `AdvisorID` != '0' ORDER BY `Time`";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments");
             $row = mysql_fetch_array($rs, MYSQL_NUM); 
+			//first item in row
             if($row){
               echo("<form action=\"AdminConfirmEditInd.php\" method=\"post\" name=\"Confirm\">");
               echo("<br>");
@@ -226,26 +228,26 @@ session_start();
                 $trdrow = mysql_fetch_row($trdrs);
               }
 
-              echo("<input type=\"radio\" name=\"IndApp\" 
+              echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
                 required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-              echo("<b>Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
+              echo("Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
               if($row[3]){
                 echo("$row[3]"); 
               }
               else{
                 echo("Available to all majors"); 
               }
-
               echo("<br>");
-
               if($row[4]){
-                echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+                echo("Enrolled: $trdrow[0] $trdrow[1]");
               }
               else{
-                echo("Enrolled: Empty</b>");
+                echo("Enrolled: Empty");
               }
+			  echo("</label>");
 
-              echo("<br><br>");
+              echo("<br>");
+			  //rest of items in row
               while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
                 $secsql = "SELECT `FirstName`, `LastName` FROM `Proj2Advisors` WHERE `id` = '$row[2]'";
                 $secrs = $COMMON->executeQuery($secsql, "Advising Appointments");
@@ -257,9 +259,9 @@ session_start();
                   $trdrow = mysql_fetch_row($trdrs);
                 }
 
-                echo("<input type=\"radio\" name=\"IndApp\" 
+                echo("<label for='$row[0]'><input type=\"radio\" id='$row[0]' name=\"IndApp\" 
                   required value=\"row[]=$row[1]&row[]=$secrow[0]&row[]=$secrow[1]&row[]=$row[3]&row[]=$row[4]\">");
-                echo("<b>Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
+                echo("Time: $row[1] Advisor: $secrow[0] $secrow[1] <br> Majors Included: ");
                 if($row[3]){
                   echo("$row[3]"); 
                 }
@@ -270,33 +272,40 @@ session_start();
                 echo("<br>");
 
                 if($row[4]){
-                  echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+                  echo("Enrolled: $trdrow[0] $trdrow[1]");
                 }
                 else{
-                  echo("Enrolled: Empty</b>");
+                  echo("Enrolled: Empty");
                 }
-
-                echo("<br><br>");
+				echo("</label>");
+                echo("<br>");
+				
               }
               echo("<div class=\"nextButton\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Delete Appointment\">");
               echo("</div>");
-              echo("</div>");
-              echo("<div class=\"bottom\">");
-              echo "<p style='color:red'>Please note that individual appointments can only be removed from schedule.</p>";
-              echo("</div>");
+			  echo("</form>");
+			  echo("<form method=\"link\" action=\"AdminUI.php\">");
+              echo("<input type=\"submit\" name=\"next\" class=\"button large\" value=\"Cancel\">");
+              echo("</form>");
             }
             else{
               echo("<br><b>There are currently no individual appointments scheduled at the current moment.</b>");
               echo("<br><br>");
+			  echo("</label>");
               echo("<form method=\"link\" action=\"AdminUI.php\">");
               echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
               echo("</form>");
             }
           ?>
+		  
 	</div>
 	</div>
-	</form>
+	<div class="bottom">
+		<p style='color:red'>Please note that individual appointments can only be removed from schedule.</p>
+	</div>
+	</div>
+	</div>
   </body>
   
 </html>
