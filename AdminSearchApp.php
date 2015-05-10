@@ -261,8 +261,8 @@ $COMMON = new Common($debug);
 	    </div>
 		
 		<div class="field">
-			<label for="appStatus">Filter Open/Closed Appointments</label>
-			<select id="advisor" name="advisor">
+			<label for="filter">Filter Open/Closed Appointments</label>
+			<select id="filter" name="filter">
 				<option value="">All</option>
 				<option value="0">Open</option>
 				<option value="1">Closed</option>

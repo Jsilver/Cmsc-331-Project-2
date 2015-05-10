@@ -246,7 +246,7 @@ $COMMON = new Common($debug);
 					$i = 0;
 					echo "Time: ";
 					foreach($times as $t){
-						echo ++$i, ". ", date('g:i A', strtotime($t)), " ";
+						echo ++$i, ") ", date('g:i A', strtotime($t)), " ";
 					}
 				}
 				echo "<br>";

@@ -207,6 +207,8 @@ $COMMON = new Common($debug);
     <div id="login">
       <div id="form">
         <div class="top">
+			<h1>Search results</h1>
+			<div class="field">
 			<p>Showing results for: </p>
 			<?php
 				$date = $_POST["date"];
@@ -214,6 +216,7 @@ $COMMON = new Common($debug);
 				$advisor = $_POST["advisor"];
 				$studID = $_POST["studID"];
 				$studLN = $_POST["studLN"];
+				$filter = $_POST["filter"];
 				
 				if($date == ''){ echo "Date: All"; }
 				else{ 
@@ -226,7 +229,7 @@ $COMMON = new Common($debug);
 					$i = 0;
 					echo "Time: ";
 					foreach($times as $t){
-						echo ++$i, ". ", date('g:i A', strtotime($t)), " ";
+						echo ++$i, ") ", date('g:i A', strtotime($t)), " ";
 					}
 				}
 				echo "<br>";
@@ -240,23 +243,55 @@ $COMMON = new Common($debug);
 						echo "Advisor: ", $row[1], " ", $row[2];
 					}
 				}
-				echo"<br>";
+				echo "<br>";
 				if($studID == '' && $studLN == ''){	echo "Student: All"; }
 				else{
+					$studLN = strtoupper($studLN);
+					$studID = strtoupper($studID);
+					$sql = "select `LastName`, `StudentID` from Proj2Students where `StudentID` = '$studID' or `LastName` = '$studLN'";
+					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+					$row = mysql_fetch_row($rs);
+					$studLN = $row[0];
+					$studID = $row[1];
 					echo "Student: ", $studID, " ", $studLN;
 				}
+				echo "<br>";
+				if($filter == ''){ echo "Filter: All appointments"; }
+				elseif($filter == 0){ echo "Filter: Open appointments"; }
+				elseif($filter == 1){ echo "Filter: Closed appointments"; }
 				?>
 				<br><br><label>
 				<?php
 				if(empty($times)){
 					if($advisor == 'I'){
-						$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `AdvisorID` != 0 and `EnrolledNum` = 0 order by `Time` ASC";
-						$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+						if($filter == 1){
+							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and 
+								`AdvisorID` != 0 and 
+								`EnrolledID` like '%$studID%' and 
+								`EnrolledNum` >= 1 order by `Time` ASC";
+						}
+						else{
+							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and 
+								`AdvisorID` != 0 and 
+								`EnrolledID` like '%$studID%' and 
+								`EnrolledNum` like '%$filter%' order by `Time` ASC";
+						}
 					}
 					else{
-						$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `AdvisorID` like '%$advisor%' and `EnrolledNum` = 0 order by `Time` ASC";
-						$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
+						if($filter == 1){
+							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and 
+								`AdvisorID` like '%$advisor%' and 
+								`EnrolledID` like '%$studID%' and 
+								`EnrolledNum` >= 1 order by `Time` ASC";
+						}
+						else{
+							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and 
+								`AdvisorID` like '%$advisor%' and 
+								`EnrolledID` like '%$studID%' and 
+								`EnrolledNum` like '%$filter%' order by `Time` ASC";
+						}
 					}
+					$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 					$row = mysql_fetch_row($rs);
 					$rsA = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 					if($row){
@@ -272,7 +307,10 @@ $COMMON = new Common($debug);
 							}
 							echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
 							echo "Advisor: ", $advName, "<br>";
-							echo "Major: ", $row[3], "<br><br>";
+							echo "Major: ", $row[3], "<br>";
+							echo "Enrolled Students: ", $row[4], "<br>";
+							echo "Number of enrolled student(s): ", $row[5], "<br>";
+							echo "Maximum number of students allowed: ", $row[6], "<br><br>";
 						}
 					}
 					else{ echo "No results found."; }
@@ -280,7 +318,18 @@ $COMMON = new Common($debug);
 				else{
 					if($advisor == 'I'){
 						foreach($times as $t){
-							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and `AdvisorID` != 0 and (`EnrolledID` like '%$studID%' or `EnrolledID` like '%$studLN%') order by `Time` ASC";
+							if($filter == 1){
+								$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and 
+									`AdvisorID` != 0 and 
+									`EnrolledID` like '%$studID%' and
+									`EnrolledNum` >= 1 order by `Time` ASC";
+							}
+							else{
+								$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and 
+									`AdvisorID` != 0 and 
+									`EnrolledID` like '%$studID%' and
+									`EnrolledNum` like '%$filter%' order by `Time` ASC";
+							}
 							$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 							$row = mysql_fetch_row($rs);
 							$rsA = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
@@ -308,11 +357,23 @@ $COMMON = new Common($debug);
 					}
 					else{
 						foreach($times as $t){
-							$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and `AdvisorID` like '%$advisor%' and (`EnrolledID` like '%$studID%' or `EnrolledID` like '%$studLN%') order by `Time` ASC";
+							if ($filter == 1){
+								$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and 
+									`AdvisorID` like '%$advisor%' and 
+									`EnrolledID` like '%$studID%' and 
+									`EnrolledNum` >= 1 order by `Time` ASC";
+							}
+							else{
+								$sql = "select * from Proj2Appointments where `Time` like '%$date%' and `Time` like '%$t%' and 
+									`AdvisorID` like '%$advisor%' and 
+									`EnrolledID` like '%$studID%' and 
+									`EnrolledNum` like '%$filter%' order by `Time` ASC";
+							}
 							$rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 							$row = mysql_fetch_row($rs);
+							$rsA = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
 							if($row){
-								while($row = mysql_fetch_row($rs)){
+								while($row = mysql_fetch_row($rsA)){
 									if($row[2] == 0){
 										$advName = "Group";
 									}
@@ -339,6 +400,7 @@ $COMMON = new Common($debug);
 		<form method="link" action="AdminUI.php" name="home">
 			<input type="submit" name="next" class="button large go" value="Return to Home">
 		</form>
+	</div>
 	</div>
 	</div>
 	</div>
