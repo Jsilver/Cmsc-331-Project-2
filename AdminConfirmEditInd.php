@@ -250,20 +250,20 @@ session_start();
             else{
               echo("Empty</b>");
             }
-
-            echo("<br><br>");
-            echo("<form method=\"link\" action=\"AdminUI.php\">");
-            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
-            echo("</form>");
-            echo("<div class=\"nextButton\">");
-            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Submit\">");
-            echo("</div>");
-            echo("</div>");
-            echo("<div class=\"bottom\">");
-            if($row[4]){
+			?>
+			<br><br>
+			<form method="link" action="AdminUI.php">
+				<input type="submit" name="home" class="button large go" value="Return to Home">
+			</form>
+    </div>    
+	</div>
+		<?php
+		if($row[4]){
               echo "<p style='color:red'>$std has been notified of the cancellation.</p>";
-            }
-          ?>
+        }
+		?>
+	<div class="bottom">
+	</div>
 	</div>
 	</form>
   </body>

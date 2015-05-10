@@ -288,10 +288,10 @@ $COMMON = new Common($debug);
             $sql = "SELECT * from `Proj2Appointments` where `Time` = '$dt' and `AdvisorID` = '0'";
             $rs = $COMMON->executeQuery($sql, $_SERVER["SCRIPT_NAME"]);
             $row = mysql_fetch_row($rs);
-            echo date('l, F d, Y g:i A', strtotime($dt)), " <i> Majors included: </i>", $majorPrint;
+            echo date('l, F d, Y g:i A', strtotime($dt)), "<br>Majors included: ", $majorPrint;
             echo("<br>Number of seats: $studentLimit");
             if($row){
-              echo "<span style='color:red'>!!</span>";
+              echo "<br><span style='color:red'>!!</span>";
             }
             else{
               $sql = "insert into Proj2Appointments (`Time`, `AdvisorID`, `Major`, `Max`) values ('$dt', '0', '$majorDB','$studentLimit')";

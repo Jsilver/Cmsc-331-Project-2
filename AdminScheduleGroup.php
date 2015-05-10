@@ -42,7 +42,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 650px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -75,7 +75,7 @@ session_start();
       margin-top: 8px; 
       }
       
-      input[type="text"],input[type="email"], textarea {
+      input[type="text"],input[type="date"], textarea {
         background-color: #F6F6F6;
         border: 1px solid #999;
         color: #444;
@@ -169,6 +169,7 @@ session_start();
       .top{ 
       border-bottom: 1px solid #eee; 
       padding-bottom: 12px; 
+	  font-size: 14px;
       }
 
       .actions{ 
@@ -208,7 +209,7 @@ session_start();
         <form action="AdminConfirmScheGroupApp.php" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" required autofocus>
+	      <input id="Date" type="date" name="Date" placeholder="mm/dd/yyyy" required autofocus> (mm/dd/yyyy)
 	    </div>
 
       <div class="field">
