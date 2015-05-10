@@ -225,6 +225,8 @@ session_start();
             $stds = mysql_fetch_row($rs);
             if($stds){
               foreach($stds as $element){
+                $sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$element'";
+                $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $sql = "SELECT `Email` FROM `Proj2Students` WHERE `StudentID` = '$element'";
                 $rs = $COMMON->executeQuery($sql, "Advising Appointments");
                 $ros = mysql_fetch_row($rs);
@@ -253,6 +255,15 @@ session_start();
             }
             echo("<b>Number of students enrolled: $row[2] </b><br>");
             echo("<b>Student limit: $row[3]</b>");
+            echo("<br><br>");
+            echo("<form method=\"link\" action=\"AdminUI.php\">");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
+            echo("</form>");
+            echo("</div>");
+            echo("<div class=\"bottom\">");
+            if($stds){
+              echo "<p style='color:red'>Students have been notified of the cancellation.</p>";
+            }
           }
           else{
             echo("<h2>The following appointment has been changed: </h2><br>");
@@ -282,12 +293,12 @@ session_start();
                     AND `AdvisorID` = '$0' AND `Major` = '$row[1]' 
                     AND `EnrolledNum` = '$row[2]' AND `Max` = '$row[3]'";
             $rs = $COMMON->executeQuery($sql, "Advising Appointments"); 
+            echo("<br><br>");
+            echo("<form method=\"link\" action=\"AdminUI.php\">");
+            echo("<input type=\"submit\" name=\"next\" class=\"button large go\" value=\"Return to Home\">");
+            echo("</form>");
           }
         ?>
-		    <form method="link" action="AdminUI.php">
-			   <input type="submit" name="next" class="button large go" value="Return to Home">
-		    </form>
-	</div>
 	</div>
 	</div>
 	</form>

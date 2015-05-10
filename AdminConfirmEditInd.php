@@ -240,12 +240,14 @@ session_start();
             echo("<b>Enrolled: ");
             if($row[4]){
               echo("$std</b>");
+              $sql = "UPDATE `Proj2Students` SET `Status`='C' WHERE `StudentID` = '$row[4]'";
+              $rs = $COMMON->executeQuery($sql, "Advising Appointments");
               $message = "The following appointment has been deleted by the adminstration of your advisor: " . "\r\n" .
                 "Time: $row[0]" . "\r\n" . 
                 "Advisor: $row[1] $row[2]" . "\r\n" . 
                 "Student: $std" . "\r\n" . 
                 "To schedule for a new appointment, please log back into the UMBC COEIT Engineering and Computer Science Advising webpage.";
-              mail($eml, "Your Advising Appointment Has Been Deleted", $message);
+              mail($eml, "Your Advising Appointment Has Been Deleted", $message); 
             }
             else{
               echo("Empty</b>");
