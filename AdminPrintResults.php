@@ -233,7 +233,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM); 
         if($row){
-          echo("Time: $row[0] Majors Included: ");
+          echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: ");
           if($row[1]){
             echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
@@ -242,7 +242,7 @@ session_start();
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("Time: $row[0] Majors Included: ");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: ");
             if($row[1]){
               echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }
@@ -263,7 +263,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("Time: $row[0] Majors Included: "); 
+          echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors included: "); 
           if($row[1]){
             echo("$row[1] <br> "); 
           }
@@ -281,7 +281,7 @@ session_start();
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
-            echo("Time: $row[0] Majors Included: "); 
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: "); 
             if($row[1]){
               echo("$row[1] <br> "); 
             }
@@ -313,7 +313,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("Time: $row[0] Majors Included: "); 
+          echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: "); 
           if($row[1]){
             echo("$row[1] <br> "); 
           }
@@ -331,7 +331,7 @@ session_start();
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
-            echo("Time: $row[0] Majors Included: "); 
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: "); 
             if($row[1]){
               echo("$row[1] <br> "); 
             }
@@ -363,7 +363,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("Time: $row[0] Majors Included: ");
+          echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: ");
           if($row[1]){
             echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
@@ -372,7 +372,7 @@ session_start();
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("Time: $row[0] Majors Included: ");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>Majors Included: ");
             if($row[1]){
               echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }

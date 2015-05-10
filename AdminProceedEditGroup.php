@@ -42,7 +42,7 @@ session_start();
       margin: 100px auto 0; 
       padding: 20px 20px 20px; 
       position: relative; 
-      width: 600px; 
+      width: 500px; 
       -webkit-border-radius: 8px; 
       -moz-border-radius: 8px; 
       border-radius: 8px; 
@@ -146,7 +146,8 @@ session_start();
       }
        
       .field{ 
-      margin: 8px 0; 
+      margin: 8px 0;
+	  font-size: 14px;
       }
 
       .field label{ 
@@ -204,7 +205,8 @@ session_start();
     <div id="login">
       <div id="form">
         <div class="top">
-          <h2>Edit Group Appointment</h2>
+          <h1>Edit Group Appointment</h1>
+		  <div class="field">
           <?php
             $debug = false;
             include('../CommonMethods.php');
@@ -214,17 +216,17 @@ session_start();
             parse_str($group);
 
             echo("<form action=\"AdminConfirmEditGroup.php\" method=\"post\" name=\"Edit\">");
-            echo("<b>Date: $row[0]</b><br>");
-            echo("<b>Majors included: ");
+            echo("Time: ". date('l, F d, Y g:i A', strtotime($row[0])). "<br>");
+            echo("Majors included: ");
             if($row[1]){
-              echo("$row[1]</b><br>"); 
+              echo("$row[1]<br>"); 
             }
             else{
-              echo("Available to all majors</b><br>"); 
+              echo("Available to all majors<br>"); 
             }
-            echo("<b>Number of students enrolled: $row[2] </b><br>");
-            echo("<b>Student limit: ");
-            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[2]\" max=\"$row[3]\" value=\"$row[3]\" /></b>");
+            echo("Number of students enrolled: $row[2] <br>");
+            echo("Student limit: ");
+            echo("<input type=\"number\" id=\"stepper\" name=\"stepper\" min=\"$row[2]\" max=\"$row[3]\" value=\"$row[3]\" />");
 
             echo("<br><br>");
 
@@ -239,6 +241,7 @@ session_start();
             }
             echo("</div>");
           ?>
+		  </div>
   </div>
   </div>
   </form>
