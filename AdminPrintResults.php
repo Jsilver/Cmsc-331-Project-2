@@ -233,27 +233,27 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM); 
         if($row){
-          echo("<b>Time: $row[0] Majors Included: ");
+          echo("Time: $row[0] Majors Included: ");
           if($row[1]){
-            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
           else{
-            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("<b>Time: $row[0] Majors Included: ");
+            echo("Time: $row[0] Majors Included: ");
             if($row[1]){
-              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }
             else{
-              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }
             echo("<br><br>");
           }
         }
         else{
-          echo("<b>No results found</b>");
+          echo("No results found");
           echo("<br><br>");
         }
 
@@ -263,7 +263,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("<b>Time: $row[0] Majors Included: "); 
+          echo("Time: $row[0] Majors Included: "); 
           if($row[1]){
             echo("$row[1] <br> "); 
           }
@@ -274,14 +274,14 @@ session_start();
             $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[2]'";
             $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
             $trdrow = mysql_fetch_row($trdrs);
-            echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+            echo("Enrolled: $trdrow[0] $trdrow[1]");
           }
           else{
-            echo("Enrolled: Empty</b>");
+            echo("Enrolled: Empty");
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
-            echo("<b>Time: $row[0] Majors Included: "); 
+            echo("Time: $row[0] Majors Included: "); 
             if($row[1]){
               echo("$row[1] <br> "); 
             }
@@ -292,16 +292,16 @@ session_start();
               $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[2]'";
               $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
               $trdrow = mysql_fetch_row($trdrs);
-              echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+              echo("Enrolled: $trdrow[0] $trdrow[1]");
             }
             else{
-              echo("Enrolled: Empty</b>");
+              echo("Enrolled: Empty");
             }
             echo("<br><br>");
           }
         }
         else{
-          echo("<b>No results found</b>");
+          echo("No results found");
           echo("<br><br>");
         }
 			}
@@ -313,7 +313,7 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("<b>Time: $row[0] Majors Included: "); 
+          echo("Time: $row[0] Majors Included: "); 
           if($row[1]){
             echo("$row[1] <br> "); 
           }
@@ -324,14 +324,14 @@ session_start();
             $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[2]'";
             $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
             $trdrow = mysql_fetch_row($trdrs);
-            echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+            echo("Enrolled: $trdrow[0] $trdrow[1]");
           }
           else{
-            echo("Enrolled: Empty</b>");
+            echo("Enrolled: Empty");
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)){
-            echo("<b>Time: $row[0] Majors Included: "); 
+            echo("Time: $row[0] Majors Included: "); 
             if($row[1]){
               echo("$row[1] <br> "); 
             }
@@ -342,16 +342,16 @@ session_start();
               $trdsql = "SELECT `FirstName`, `LastName` FROM `Proj2Students` WHERE `StudentID` = '$row[2]'";
               $trdrs = $COMMON->executeQuery($trdsql, "Advising Appointments");
               $trdrow = mysql_fetch_row($trdrs);
-              echo("Enrolled: $trdrow[0] $trdrow[1]</b>");
+              echo("Enrolled: $trdrow[0] $trdrow[1]");
             }
             else{
-              echo("Enrolled: Empty</b>");
+              echo("Enrolled: Empty");
             }
             echo("<br><br>");
           }
         }
         else{
-          echo("<b>No results found</b>");
+          echo("No results found");
           echo("<br><br>");
         }
 			}
@@ -363,27 +363,27 @@ session_start();
         $rs = $COMMON->executeQuery($sql, "Advising Appointments");
         $row = mysql_fetch_array($rs, MYSQL_NUM);
         if($row){
-          echo("<b>Time: $row[0] Majors Included: ");
+          echo("Time: $row[0] Majors Included: ");
           if($row[1]){
-            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
           else{
-            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+            echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
           }
           echo("<br><br>");
           while ($row = mysql_fetch_array($rs, MYSQL_NUM)) {
-            echo("<b>Time: $row[0] Majors Included: ");
+            echo("Time: $row[0] Majors Included: ");
             if($row[1]){
-              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+              echo("$row[1] <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }
             else{
-              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]</b>"); 
+              echo("Available to all majors <br> Number of students enrolled: $row[2] <br> Number of seats: $row[3]"); 
             }
             echo("<br><br>");
           }
         }
         else{
-          echo("<b>No results found</b>");
+          echo("No results found");
           echo("<br><br>");
         }
 			}
