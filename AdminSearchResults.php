@@ -110,6 +110,7 @@ $COMMON = new Common($debug);
         overflow: visible;
         padding: 0 12px;
         margin: 5px auto 0;
+		margin-top: 10px;
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -217,6 +218,7 @@ $COMMON = new Common($debug);
 				$studID = $_POST["studID"];
 				$studLN = $_POST["studLN"];
 				$filter = $_POST["filter"];
+				$results = array();
 				
 				if($date == ''){ echo "Date: All"; }
 				else{ 
@@ -305,15 +307,15 @@ $COMMON = new Common($debug);
 								$row2 = mysql_fetch_row($rs2);
 								$advName = $row2[1] ." ". $row2[2];
 							}
-							echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-							echo "Advisor: ", $advName, "<br>";
-							echo "Major: ", $row[3], "<br>";
-							echo "Enrolled Students: ", $row[4], "<br>";
-							echo "Number of enrolled student(s): ", $row[5], "<br>";
-							echo "Maximum number of students allowed: ", $row[6], "<br><br>";
+							$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])). 
+									"<br>Advisor: ". $advName. 
+									"<br>Major: ". $row[3]. 
+									"<br>Enrolled Students: ". $row[4]. 
+									"<br>Number of enrolled student(s): ". $row[5]. 
+									"<br>Maximum number of students allowed: ". $row[6]. "<br><br>";
+							array_push($results, $found);
 						}
 					}
-					else{ echo "No results found."; }
 				}
 				else{
 					if($advisor == 'I'){
@@ -344,15 +346,15 @@ $COMMON = new Common($debug);
 										$row2 = mysql_fetch_row($rs2);
 										$advName = $row2[1] ." ". $row2[2];
 									}
-									echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-									echo "Advisor: ", $advName, "<br>";
-									echo "Major: ", $row[3], "<br>";
-									echo "Enrolled Students: ", $row[4], "<br>";
-									echo "Number of enrolled student(s): ", $row[5], "<br>";
-									echo "Maximum number of students allowed: ", $row[6], "<br><br>";
+									$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])). 
+											"<br>Advisor: ". $advName. 
+											"<br>Major: ". $row[3]. 
+											"<br>Enrolled Students: ". $row[4]. 
+											"<br>Number of enrolled student(s): ". $row[5]. 
+											"<br>Maximum number of students allowed: ". $row[6]. "<br><br>";
+									array_push($results, $found);
 								}
 							}
-							else{ echo "No results found."; }
 						}
 					}
 					else{
@@ -383,16 +385,24 @@ $COMMON = new Common($debug);
 										$row2 = mysql_fetch_row($rs2);
 										$advName = $row2[1] ." ". $row2[2];
 									}
-									echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-									echo "Advisor: ", $advName, "<br>";
-									echo "Major: ", $row[3], "<br>";
-									echo "Enrolled Students: ", $row[4], "<br>";
-									echo "Number of enrolled student(s): ", $row[5], "<br>";
-									echo "Maximum number of students allowed: ", $row[6], "<br><br>";
+									$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])). 
+											"<br>Advisor: ". $advName. 
+											"<br>Major: ". $row[3]. 
+											"<br>Enrolled Students: ". $row[4]. 
+											"<br>Number of enrolled student(s): ". $row[5]. 
+											"<br>Maximum number of students allowed: ". $row[6]. "<br><br>";
+									array_push($results, $found);
 								}
 							}
-							else{ echo "No results found."; }
 						}
+					}
+				}
+				if(empty($results)){
+					echo "No results found.<br><br>";
+				}
+				else{
+					foreach($results as $r){
+					echo $r;
 					}
 				}
 				?>
@@ -402,6 +412,9 @@ $COMMON = new Common($debug);
 		</form>
 	</div>
 	</div>
+	</div>
+	<div class="bottom">
+		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
 	</div>
 	</div>
 	</form>

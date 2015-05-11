@@ -267,7 +267,7 @@ $advisorName = $row[1]." ".$row[2];
 		</div>
 		<div class="bottom">
 		<p>Note: Appointments are maximum 30 minutes long.</p>
-		<p>If there are no more open appointments, contact your advisor or click <a href='Logout.php'>here</a> to start over.</p>
+		<p style="color:red">If there are no more open appointments, contact your advisor or click <a href='Logout.php'>here</a> to start over.</p>
 		</div>
   </body>
 </html>

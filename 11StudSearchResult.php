@@ -105,7 +105,7 @@ $COMMON = new Common($debug);
         overflow: visible;
         padding: 0 12px;
         margin: 5px auto 0;
-		margin-top: 30px;
+		margin-top: 10px;
         text-decoration: none;
         vertical-align: top;
         white-space: nowrap;
@@ -234,6 +234,7 @@ $COMMON = new Common($debug);
 				$date = $_POST["date"];
 				$times = $_POST["time"];
 				$advisor = $_POST["advisor"];
+				$results = array();
 				
 				if($date == ''){ echo "Date: All"; }
 				else{ 
@@ -285,12 +286,13 @@ $COMMON = new Common($debug);
 								$row2 = mysql_fetch_row($rs2);
 								$advName = $row2[1] ." ". $row2[2];
 							}
-							echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-							echo "Advisor: ", $advName, "<br>";
-							echo "Major: ", $row[3], "<br><br>";
+							
+							$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])).
+									"<br>Advisor: ". $advName. 
+									"<br>Major: ". $row[3]. "<br><br>";
+							array_push($results, $found);
 						}
 					}
-					else{ echo "No results found."; }
 				}
 				else{
 					if($advisor == 'I'){
@@ -310,12 +312,12 @@ $COMMON = new Common($debug);
 										$row2 = mysql_fetch_row($rs2);
 										$advName = $row2[1] ." ". $row2[2];
 									}
-									echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-									echo "Advisor: ", $advName, "<br>";
-									echo "Major: ", $row[3], "<br><br>"; 
+									$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])).
+											"<br>Advisor: ". $advName. 
+											"<br>Major: ". $row[3]. "<br><br>";
+									array_push($results, $found);
 								}
 							}
-							else{ echo "No results found."; }
 						}
 					}
 					else{
@@ -334,26 +336,34 @@ $COMMON = new Common($debug);
 										$row2 = mysql_fetch_row($rs2);
 										$advName = $row2[1] ." ". $row2[2];
 									}
-									echo "Time: ", date('l, F d, Y g:i A', strtotime($row[1])), "<br>";
-									echo "Advisor: ", $advName, "<br>";
-									echo "Major: ", $row[3], "<br><br>"; 
+									$found = "Time: ". date('l, F d, Y g:i A', strtotime($row[1])).
+											"<br>Advisor: ". $advName. 
+											"<br>Major: ". $row[3]. "<br><br>";
+									array_push($results, $found);
 								}
 							}
-							else{ echo "No results found."; }
 						}
+					}
+				}
+				if(empty($results)){
+					echo "No results found.<br><br>";
+				}
+				else{
+					foreach($results as $r){
+					echo $r;
 					}
 				}
 			?>
 			</label>
         </div>
-		<div class="bottom">
-		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
-		</div>
 		<form action="02StudHome.php" method="link">
 	    <div class="nextButton">
 			<input type="submit" name="done" class="button large go" value="Done">
 	    </div>
 		</form>
+		</div>
+		<div class="bottom">
+		<p>If the Major category is followed by a blank, then it is open for all majors.</p>
 		</div>
   </body>
 </html>
