@@ -262,12 +262,12 @@ session_start();
 		</div>
     </div>    
 	</div>
+	<div class="bottom">
 		<?php
 		if($row[4]){
               echo "<p style='color:red'>$std has been notified of the cancellation.</p>";
         }
 		?>
-	<div class="bottom">
 	</div>
 	</div>
 	</form>
