@@ -209,7 +209,7 @@ session_start();
         <form action="AdminConfirmScheIndApp.php" method="post" name="Confirm">
 	    <div class="field">
 	      <label for="Date">Date</label>
-	      <input id="Date" type="date" name="Date" placeholder="mm/dd/yyyy" required autofocus> (mm/dd/yyyy)
+	      <input id="Date" type="date" name="Date" placeholder="mm/dd/yyyy" min="2015-03-01" max="2015-05-30" required autofocus> (mm/dd/yyyy)
 	    </div>
 
 	    <div class="field">
@@ -230,7 +230,6 @@ session_start();
         <input type="checkbox" name="time[]" value="14:30:00"> 2:30PM - 3:00PM <br>
         <input type="checkbox" name="time[]" value="15:00:00"> 3:00PM - 3:30PM <br>
         <input type="checkbox" name="time[]" value="15:30:00"> 3:30PM - 4:00PM <br>
-        <input type="checkbox" name="time[]" value="16:00:00"> 4:00PM - 4:30PM <br>
 	     
 	    </div>
 
